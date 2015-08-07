@@ -7,6 +7,7 @@ WordPress Social Media Management Plugin
 -	Connect to Facebook
 -	Select FB pages
 -	Connect to Twitter
+
 #### Post level interface
 -	Direct Publish (click anytime after post publish, greyed out state if clicked before publish)
 -	Opt-out social accounts (& pages)
@@ -22,11 +23,13 @@ WordPress Social Media Management Plugin
 -	Connect to Instagram
 -	Connect to Pinterest
 -	Connect to Google+
+
 #### Post level interface
 -	Schedule publication
 -	Repeat publication opt-in (time & amount interval)
 -	Edit field for customised message per medium
 -	Attached Image opt-out
+
 #### Dashboard level list
 -	Upcoming publications (delete option)
 -	Done publications (separate list, delete & re-publish option)
