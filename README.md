@@ -20,9 +20,12 @@ WordPress Social Media Management Plugin
 ## Future Feature Requirements
 ### Admin
 #### Plugin level
+-	Connect to multiple Facebook accounts
+-	Connect to multiple Twitter accounts
 -	Connect to Instagram
 -	Connect to Pinterest
 -	Connect to Google+
+-	Connect to LinkedIn
 
 #### Post level interface
 -	Schedule publication
@@ -34,3 +37,9 @@ WordPress Social Media Management Plugin
 -	Upcoming publications (delete option)
 -	Done publications (separate list, delete & re-publish option)
 -	Filters and grouping options
+
+#### Archive/home view
+-	Add share buttons to entries
+
+#### Post view
+-	Add share buttons to single view
