@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://example.com
+ * @link       https://wordpress.org/plugins/cloudoki-smmp/
  * @since      1.0.0
  *
  * @package    SMMP
@@ -18,19 +18,30 @@
  * @since      1.0.0
  * @package    SMMP
  * @subpackage SMMP/includes
- * @author     Your Name <email@example.com>
+ * @author     Koen Betsens
  */
 class SMMP_Activator {
 
 	/**
-	 * Short Description. (use period)
+	 * Add SMMP core functionalities.
 	 *
-	 * Long Description.
+	 * Activator adds A SMMP records table and basic option defaults.
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
+	public static function activate ()
+	{
 
+	}
+	
+	/**
+	 *	Add The SMMP Wordpress Table
+	 */
+	public static function generate_table ()
+	{
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . "smmp";
 	}
 
 }

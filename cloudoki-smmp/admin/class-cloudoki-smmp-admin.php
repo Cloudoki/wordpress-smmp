@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://example.com
+ * @link       https://wordpress.org/plugins/cloudoki-smmp/
  * @since      1.0.0
  *
  * @package    SMMP
@@ -18,7 +18,7 @@
  *
  * @package    SMMP
  * @subpackage SMMP/admin
- * @author     Your Name <email@example.com>
+ * @author     Koen Betsens
  */
 class SMMP_Admin {
 

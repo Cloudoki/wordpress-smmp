@@ -1,6 +1,11 @@
 # wordpress-smmp
 WordPress Social Media Management Plugin
 
+**Cloudoki WP SMMP** is a Social Media Management Plugin for Wordpress.
+SMMP has an integral WP implementation, no outside smms services are required. 
+SMMP is developed for business critical environments, including failed publication logs and notice mails for outdated service connections.
+
+
 ## 1st Stage Feature Requirements
 ### Admin
 #### Plugin level
@@ -43,3 +48,7 @@ WordPress Social Media Management Plugin
 
 #### Post view
 -	Add share buttons to single view
+
+#### Credits
+The Plugin boilerplate is based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
+The WP Directory boilerplate is based on https://github.com/DevinVinson/Plugin-Directory-Boilerplate

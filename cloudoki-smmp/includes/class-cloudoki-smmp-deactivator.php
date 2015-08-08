@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       http://example.com
+ * @link       https://wordpress.org/plugins/cloudoki-smmp/
  * @since      1.0.0
  *
  * @package    SMMP
@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    SMMP
  * @subpackage SMMP/includes
- * @author     Your Name <email@example.com>
+ * @author     Koen Betsens
  */
 class SMMP_Deactivator {
 
