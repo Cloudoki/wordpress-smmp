@@ -1,4 +1,32 @@
 /**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
+ * Admin area
  */
+
+/**
+ * SMMP plagin pages
+ */
+.smmp-admin-page input[type="text"],
+.smmp-admin-page input[type="url"]	{
+	width: 100%;
+}
+
+/**
+ * Edit Post - Submitbox
+ */
+.misc-pub-smmp	{
+	 
+}
+
+.misc-pub-smmp:before	{
+	content: "\f487";
+	font: 400 20px/1 dashicons;
+	color: #82878c;
+	speak: none;
+	display:inline-block;
+	padding: 0 2px 0 0;	 
+}
+
+.misc-pub-smmp ul,
+.misc-pub-smmp li 	{
+	display: inline !important;
+}

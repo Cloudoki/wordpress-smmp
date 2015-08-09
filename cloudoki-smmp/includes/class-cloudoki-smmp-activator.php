@@ -65,16 +65,6 @@ class SMMP_Activator {
 		$table_name = $wpdb->prefix . "smmp";
 		$charset_collate = $wpdb->get_charset_collate();
 		
-		/*$sql = "CREATE TABLE %s$table_name (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			post_id int(11) NOT NULL,
-			parent_id int(11) NOT NULL,
-			type varchar(32) DEFAULT '' NOT NULL,
-			alteration text NOT NULL,
-			
-			UNIQUE KEY id (id)
-		) %s$charset_collate;";*/
-		
 		require_once (ABSPATH . 'wp-admin/includes/upgrade.php' );
 		
 		dbDelta (sprintf ( self::$table_sql, $table_name, $charset_collate ));
@@ -96,5 +86,23 @@ class SMMP_Activator {
 		
 		// Twitter collection
 		add_option( "smmp_twitter", '[]' );
+		
+		// Facebook Account URL
+		add_option( "smmp_url_facebook", '' );
+		
+		// Twitter Account URL
+		add_option( "smmp_url_twitter", '' );
+		
+		// Instagram Account URL
+		add_option( "smmp_url_instagram", '' );
+		
+		// Pinterest Account URL
+		add_option( "smmp_url_pinterest", '' );
+		
+		// Google+ Account URL
+		add_option( "smmp_url_googleplus", '' );
+		
+		// LinkedIn Account URL
+		add_option( "smmp_url_linkedin", '' );
 	}
 }

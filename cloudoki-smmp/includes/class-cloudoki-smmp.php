@@ -173,6 +173,11 @@ class SMMP {
 		// Load Dashboard widget
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'admin_dashboard' );
 		
+		// Load Edit Post additions
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'admin_post' );
+		$this->loader->add_action( 'post_submitbox_misc_actions', $plugin_admin, 'admin_post_submitbox' );
+		
+		
 		// Load Expired Account notice
 		try { $plugin_admin->validate_accounts (); }
 		catch (Exception $e)

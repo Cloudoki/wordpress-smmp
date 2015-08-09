@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provide an admin dashboard widget for the plugin
+ * Provide buttons in the edit post publishbox
  *
  * @link       https://wordpress.org/plugins/cloudoki-smmp/
  * @since      1.0.0
@@ -11,4 +11,4 @@
  */
 ?>
 
-<i>No social posts yet</i>
+<p>The smmp metabox</p>

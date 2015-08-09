@@ -25,5 +25,35 @@
 		</form>-->
 	</div>
 	
+	<div class="card">
+		<h3>View Options</h3>
+		
+		<hr>
+		<h4>Social on website</h4>
+		<ul>
+			<li>
+				<input name='view-sidebar' id='view-sidebar' type="checkbox" value='1'>
+				<label for='view-sidebar'>Show social icons in sidebar</label>
+			</li>
+			<li>
+				<input name='view-footer' id='view-footer' type="checkbox" value='1'>
+				<label for='view-footer'>Show social icons in footer</label>
+			</li>
+		</ul>
+		
+		<hr>
+		<h4>Admin panels</h4>
+		<ul>
+			<li>
+				<input name='view-dashboard' id='view-dashboard' type="checkbox" value='1'>
+				<label for='view-dashboard'>Show Dashboard List</label>
+			</li>
+			<li>
+				<input name='view-submitbox' id='view-submitbox' type="checkbox" value='1'>
+				<label for='view-submitbox'>Show submit box summary</label>
+			</li>
+		</ul>
+	</div>
+	
 	
 </div>

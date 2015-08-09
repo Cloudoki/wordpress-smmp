@@ -124,7 +124,37 @@ class SMMP_Admin {
 	 */
 	public function admin_dashboard ()
 	{
-		wp_add_dashboard_widget( 'smmp-widget', 'SMMP List', array( $this, 'admin_dashboard_widget' ));
+		wp_add_dashboard_widget( 'smmp-widget', 'Social Publications', array( $this, 'admin_dashboard_widget' ));
+	}
+	
+	/**
+	 * Metabox injection into the admin edit post page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function admin_post()
+	{
+		add_meta_box( 'smmp-edit-post', 'Social Publishing', array( $this, 'admin_post_metabox' ), null, 'advanced');
+	}
+	
+	/**
+	 * Metabox display.
+	 *
+	 * @since    1.0.0
+	 */
+	public function admin_post_metabox ()
+	{
+		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-metabox.php';
+	}
+	
+	/**
+	 * Buttons injection into the admin edit post submitbox.
+	 *
+	 * @since    1.0.0
+	 */
+	public function admin_post_submitbox ()
+	{
+		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
 	}
 	
 	/**
@@ -166,6 +196,7 @@ class SMMP_Admin {
 	{
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-dashboard-widget.php';
 	}
+	
 	
 	/**
 	 * SMMP Social Accounts - validate.

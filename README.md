@@ -22,6 +22,8 @@ SMMP is developed for business critical environments, including failed publicati
 -	Upcoming publications (delete option)
 -	Done publications (same list, greyed out)
 
+---
+
 ## Future Feature Requirements
 ### Admin
 #### Plugin level
@@ -31,6 +33,7 @@ SMMP is developed for business critical environments, including failed publicati
 -	Connect to Pinterest
 -	Connect to Google+
 -	Connect to LinkedIn
+-	Connect to "custom" (Name, slug, icon, url)
 -	Add new (blanco addition)
 
 #### Post level interface
