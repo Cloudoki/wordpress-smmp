@@ -55,7 +55,16 @@ class SMMP {
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
-	protected $version;
+	static $version = "1.0.0";
+	
+	/**
+	 * The current version of the plugin db.
+	 *
+	 * @since    1.0.0
+	 * @access   static
+	 * @var      string    $db_version    The current version of the plugin db.
+	 */
+	static $db_version = "1.0.0";
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -69,9 +78,9 @@ class SMMP {
 	public function __construct() {
 
 		$this->cloudoki_smmp = 'cloudoki-smmp';
-		$this->version = '1.0.0';
 
 		$this->load_dependencies();
+		
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
@@ -96,28 +105,31 @@ class SMMP {
 	 */
 	private function load_dependencies() {
 
+		$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
+		
+		
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cloudoki-smmp-loader.php';
+		require_once $plugin_path . 'includes/class-cloudoki-smmp-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cloudoki-smmp-i18n.php';
+		require_once $plugin_path . 'includes/class-cloudoki-smmp-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cloudoki-smmp-admin.php';
+		require_once $plugin_path . 'admin/class-cloudoki-smmp-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cloudoki-smmp-public.php';
+		require_once $plugin_path . 'public/class-cloudoki-smmp-public.php';
 
 		$this->loader = new SMMP_Loader();
 
@@ -154,7 +166,19 @@ class SMMP {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		
+		// Load Menu injection
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'plugin_menu' );
+		
+		// Load Dashboard widget
+		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'admin_dashboard' );
+		
+		// Load Expired Account notice
+		try { $plugin_admin->validate_accounts (); }
+		catch (Exception $e)
+		{
+			$this->loader->add_action( 'admin_notices', $plugin_admin, 'notice_accounts' );
+		}
 	}
 
 	/**
@@ -164,8 +188,8 @@ class SMMP {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
-
+	private function define_public_hooks()
+	{
 		$plugin_public = new SMMP_Public( $this->get_cloudoki_smmp(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -178,7 +202,8 @@ class SMMP {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -189,7 +214,8 @@ class SMMP {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_cloudoki_smmp() {
+	public function get_cloudoki_smmp()
+	{
 		return $this->cloudoki_smmp;
 	}
 
@@ -199,7 +225,8 @@ class SMMP {
 	 * @since     1.0.0
 	 * @return    SMMP_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -209,8 +236,9 @@ class SMMP {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
-		return $this->version;
+	public function get_version()
+	{
+		return self::$version;
 	}
 
 }

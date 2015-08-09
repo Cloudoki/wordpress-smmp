@@ -23,6 +23,23 @@
 class SMMP_Activator {
 
 	/**
+	 *	SMMP Table injection
+	 */
+	static $table_sql = "CREATE TABLE %s (
+		id int(11) NOT NULL AUTO_INCREMENT,
+		post_id int(11) NOT NULL,
+		parent_id int(11) NOT NULL,
+		type varchar(32) DEFAULT '' NOT NULL,
+		alteration text NOT NULL,
+		alteration text NOT NULL,
+		publish_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		state varchar(32) DEFAULT '' NOT NULL,
+		
+		UNIQUE KEY id (id)
+	) %s;";
+	
+	
+	/**
 	 * Add SMMP core functionalities.
 	 *
 	 * Activator adds A SMMP records table and basic option defaults.
@@ -31,7 +48,11 @@ class SMMP_Activator {
 	 */
 	public static function activate ()
 	{
-
+		// Create or update db table
+		self::generate_table ();
+		
+		// Create or update options
+		self::generate_options ();
 	}
 	
 	/**
@@ -42,6 +63,38 @@ class SMMP_Activator {
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . "smmp";
+		$charset_collate = $wpdb->get_charset_collate();
+		
+		/*$sql = "CREATE TABLE %s$table_name (
+			id int(11) NOT NULL AUTO_INCREMENT,
+			post_id int(11) NOT NULL,
+			parent_id int(11) NOT NULL,
+			type varchar(32) DEFAULT '' NOT NULL,
+			alteration text NOT NULL,
+			
+			UNIQUE KEY id (id)
+		) %s$charset_collate;";*/
+		
+		require_once (ABSPATH . 'wp-admin/includes/upgrade.php' );
+		
+		dbDelta (sprintf ( self::$table_sql, $table_name, $charset_collate ));
 	}
-
+	
+	/**
+	 *	Add The SMMP Wordpress Options
+	 */
+	public static function generate_options ()
+	{
+		// Record db version
+		add_option( "smmp_db_version", SMMP::$db_version );
+		
+		// Short url for customised links
+		add_option( "smmp_short_url", '' );
+		
+		// Facebook collection
+		add_option( "smmp_facebook", '[]' );
+		
+		// Twitter collection
+		add_option( "smmp_twitter", '[]' );
+	}
 }

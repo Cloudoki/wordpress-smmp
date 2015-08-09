@@ -31,23 +31,32 @@ SMMP is developed for business critical environments, including failed publicati
 -	Connect to Pinterest
 -	Connect to Google+
 -	Connect to LinkedIn
+-	Add new (blanco addition)
 
 #### Post level interface
 -	Schedule publication
 -	Repeat publication opt-in (time & amount interval)
 -	Edit field for customised message per medium
 -	Attached Image opt-out
+-	Add Twitter excerpt (for sharing)
 
 #### Dashboard level list
 -	Upcoming publications (delete option)
 -	Done publications (separate list, delete & re-publish option)
 -	Filters and grouping options
+-	Add new (blanco addition)
+-	Search ability
 
+### Public
 #### Archive/home view
 -	Add share buttons to entries
 
+#### Social Post example view
+-	"Preview" in admin should show social media themed preview of post
+
 #### Post view
 -	Add share buttons to single view
+-	Placeholder location for Twitter excerpts (with actionable)
 
 #### Credits
 The Plugin boilerplate is based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
