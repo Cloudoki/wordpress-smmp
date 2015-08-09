@@ -42,6 +42,7 @@ SMMP is developed for business critical environments, including failed publicati
 -	Edit field for customised message per medium
 -	Attached Image opt-out
 -	Add Twitter excerpt (for sharing)
+-	Tag recognition (link to wordpress)
 
 #### Dashboard level list
 -	Upcoming publications (delete option)
@@ -49,6 +50,11 @@ SMMP is developed for business critical environments, including failed publicati
 -	Filters and grouping options
 -	Add new (blanco addition)
 -	Search ability
+-	Auto-scheduling
+
+#### Related outside sources
+-	Stream of related social and rss content, as actionables (retweet, like, ...)
+-	Will create seo traction
 
 ### Public
 #### Archive/home view
@@ -61,6 +67,6 @@ SMMP is developed for business critical environments, including failed publicati
 -	Add share buttons to single view
 -	Placeholder location for Twitter excerpts (with actionable)
 
-#### Credits
+### Credits
 The Plugin boilerplate is based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 The WP Directory boilerplate is based on https://github.com/DevinVinson/Plugin-Directory-Boilerplate

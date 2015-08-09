@@ -1,5 +1,5 @@
 === Cloudoki SMMP ===
-Contributors: tickee, michaellawrence
+Contributors: tickee, rui.molefas, michaellawrence
 Tags: smms, social media, facebook, twitter, instagram, pinterest, google+, social media management, publishing
 Requires at least: 4.0
 Tested up to: 4.2.4
