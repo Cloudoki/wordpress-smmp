@@ -21,7 +21,8 @@
 		<!--<form>
 			<label for="smmp_short_url"></label>
 			<input id="smmp_short_url" name="smmp_short_url" type="text" placeholder="" value="">
-			<input type="submit" value="Update">
+			<hr>
+			<input type="submit" class="button action" value="Update">
 		</form>-->
 	</div>
 	
@@ -53,6 +54,9 @@
 				<label for='view-submitbox'>Show submit box summary</label>
 			</li>
 		</ul>
+		
+		<hr>
+		<input type="submit" class="button action" value="Update">
 	</div>
 	
 	

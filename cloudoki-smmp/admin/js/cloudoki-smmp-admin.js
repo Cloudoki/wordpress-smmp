@@ -1,6 +1,11 @@
 (function( $ ) {
 	'use strict';
 
+	$( window ).load(function()
+	{
+		smmp_admin.init ();
+	});
+
 	/**
 	 * All of the code for your admin-specific JavaScript source
 	 * should reside in this file.
@@ -40,9 +45,32 @@
  */
 var smmp_admin = 
 {
+	init : function ()
+	{
+		// Connect buttons
+		jQuery('#connect-facebook').on('click', this.connect_facebook);
+		jQuery('#connect-twitter').on('click', this.connect_twitter);
+	},
+	
 	connect_facebook: function ()
 	{
 		
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '637599113043974',
+				xfbml      : true,
+				version    : 'v2.4'
+			});
+		};
+		
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
 	},
 	
 	connect_twitter: function ()
@@ -51,5 +79,3 @@ var smmp_admin =
 	}	
 }
 
-$( window ).load(function() {
-});

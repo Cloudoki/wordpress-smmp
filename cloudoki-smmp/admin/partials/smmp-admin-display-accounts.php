@@ -22,7 +22,7 @@
 			Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
 		</p>
 		
-		<input type="button" class="button button-primary button-hero" value="Connect to Facebook">
+		<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook">
 		
 		<hr>
 		
@@ -54,7 +54,7 @@
 			Connect your Twitter account, so you can manage and publish your tweets on your timeline.
 		</p>
 		
-		<input type="button" class="button button-primary button-hero" value="Connect to Twitter">
+		<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Twitter">
 		
 		<hr>
 		
