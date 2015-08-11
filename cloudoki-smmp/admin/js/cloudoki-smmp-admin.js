@@ -30,3 +30,26 @@
 	 */
 
 })( jQuery );
+
+
+/**
+ *	The SMMP Admin class
+ *	
+ *	Connect to social accounts, perform async actions
+ *	and 
+ */
+var smmp_admin = 
+{
+	connect_facebook: function ()
+	{
+		
+	},
+	
+	connect_twitter: function ()
+	{
+		
+	}	
+}
+
+$( window ).load(function() {
+});
