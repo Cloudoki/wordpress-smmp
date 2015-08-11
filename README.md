@@ -10,7 +10,7 @@ SMMP is developed for business critical environments, including failed publicati
 ### Admin
 #### Plugin level
 -	Connect to Facebook
--	Select FB pages
+-	Select FB pages (add "primary" opt-in actionable)
 -	Connect to Twitter
 
 #### Post level interface
@@ -61,7 +61,7 @@ SMMP is developed for business critical environments, including failed publicati
 -	Add share buttons to entries
 
 #### Social Post example view
--	"Preview" in admin should show social media themed preview of post
+-	"Preview" in admin should show social media themed preview of social post
 
 #### Post view
 -	Add share buttons to single view
