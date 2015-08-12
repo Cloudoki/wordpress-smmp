@@ -33,18 +33,57 @@
 	display: inline !important;
 }
 
-.button.smmp-share-button {
+.misc-pub-smmp li {
+	margin-right: 5px;
+}
+
+.misc-pub-smmp .smmp-share-button {
 	padding: 0 8px 1px;
 }
 
-.button.smmp-share-button > span {
+.misc-pub-smmp .smmp-share-button > span {
 	padding-top: 5px;
 }
 
-.button.smmp-share-button.selected {
+.misc-pub-smmp .smmp-share-button > input {
+	display: none;
+}
+
+.misc-pub-smmp .smmp-share-button .pub-status {
+	position: absolute;
+    top: -5px;
+    right: -5px;
+    display: none;
+}
+
+.misc-pub-smmp.published .smmp-share-button {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	opacity: .6;
+	color: #a0a5aa!important;
+    border-color: #ddd!important;
+    background: #f7f7f7!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    text-shadow: 0 1px 0 #fff!important;
+    cursor: default;
+    position: relative;
+}
+
+.misc-pub-smmp.published .smmp-share-button .pub-status > span{
+    background-color: green;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.misc-pub-smmp.scheduled .smmp-share-button.active {
 	background: #eee;
     border-color: #999;
     color: #32373c;
     -webkit-box-shadow: inset 0 2px 5px -3px rgba(0,0,0,.5);
     box-shadow: inset 0 2px 5px -3px rgba(0,0,0,.5);
+}
+
+.misc-pub-smmp.published .smmp-share-button.active .pub-status{
+    display: block;
 }

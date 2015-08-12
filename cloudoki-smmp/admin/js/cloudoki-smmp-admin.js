@@ -52,7 +52,7 @@ var smmp_admin =
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
 
 		// smmp publish action buttons
-		jQuery('.smmp-share-button').click(function(){jQuery(this).toggleClass('selected')});
+		jQuery('.misc-pub-smmp.scheduled .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
 	},
 	
 	connect_facebook: function ()
@@ -79,6 +79,12 @@ var smmp_admin =
 	connect_twitter: function ()
 	{
 		
-	}	
+	},	
+
+	toggle_smmp_share: function(button)
+	{
+		button.toggleClass('active');
+		button.find('input').prop("checked", button.hasClass('active'));
+	}
 }
 

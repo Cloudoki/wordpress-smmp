@@ -154,17 +154,17 @@ class SMMP_Admin {
 	 */
 	public function admin_post_submitbox ()
 	{
-		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
-	}
+		$tempdata = array(
+			'facebook' => array( 'status' => 'scheduled', 'type' => 'facebook' ),
+			'twitter' => array( 'status' => 'unscheduled', 'type' => 'twitter' )
+		);
 
-	/**
-	 * Update/Sumbit post submitbox
-	 *
-	 * @since    1.0.0
-	 */
-	public function admin_post_submitbox_submit ()
-	{
-		
+		$status_class = 'published';
+
+		$fb_active = $tempdata['facebook']['status'] == 'scheduled' || $tempdata['facebook']['status'] == 'published'? true: false;
+		$twt_active = $tempdata['twitter']['status'] == 'scheduled' || $tempdata['twitter']['status'] == 'published'? true: false;
+
+		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
 	}
 	
 	/**
