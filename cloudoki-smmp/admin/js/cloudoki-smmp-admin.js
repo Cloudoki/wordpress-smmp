@@ -55,6 +55,12 @@ var smmp_admin =
 		jQuery('.misc-pub-smmp.scheduled .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
 	},
 	
+	update_option: function (el)
+	{
+		//var input = jQuery(this).parent().find('input[data-option]');
+		//window.location = "&" + input.data('option') + "=" + input.value;
+	},
+	
 	connect_facebook: function ()
 	{
 		

@@ -12,3 +12,11 @@
 ?>
 
 <p>The smmp metabox</p>
+
+<form>
+	<input type="hidden" name="page" value="<?=$page?>">
+	<input type="hidden" name="post_id" value="<?=$the_post['ID']?>">
+	<input type="hidden" name="type" value="facebook">
+	
+	<input type="submit" name="fb" value="Create Facebook Post">
+</form>
