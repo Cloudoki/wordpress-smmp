@@ -50,6 +50,15 @@ var smmp_admin =
 		// Connect buttons
 		jQuery('#connect-facebook').on('click', this.connect_facebook);
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
+		
+		// Options buttons
+		jQuery('.button.action.update_option').on('click', this.update_option);
+	},
+	
+	update_option: function (el)
+	{
+		//var input = jQuery(this).parent().find('input[data-option]');
+		//window.location = "&" + input.data('option') + "=" + input.value;
 	},
 	
 	connect_facebook: function ()

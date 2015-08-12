@@ -16,48 +16,51 @@
 <div class="wrap">
 	<h2>SMMP Settings [should be dynamic]</h2>
 	
-	<div class="card">
-		<h3>General Options</h3>
-		<!--<form>
+	<form action="">
+		<input type="hidden" name="page" value="<?=$page?>">
+		<input type="hidden" name="update" value=1>
+	
+		<div class="card">
+			<h3>General Options</h3>
+			<!--
 			<label for="smmp_short_url"></label>
 			<input id="smmp_short_url" name="smmp_short_url" type="text" placeholder="" value="">
 			<hr>
 			<input type="submit" class="button action" value="Update">
-		</form>-->
-	</div>
-	
-	<div class="card">
-		<h3>View Options</h3>
+			-->
+		</div>
 		
-		<hr>
-		<h4>Social on website</h4>
-		<ul>
-			<li>
-				<input name='view-sidebar' id='view-sidebar' type="checkbox" value='1'>
-				<label for='view-sidebar'>Show social icons in sidebar</label>
-			</li>
-			<li>
-				<input name='view-footer' id='view-footer' type="checkbox" value='1'>
-				<label for='view-footer'>Show social icons in footer</label>
-			</li>
-		</ul>
-		
-		<hr>
-		<h4>Admin panels</h4>
-		<ul>
-			<li>
-				<input name='view-dashboard' id='view-dashboard' type="checkbox" value='1'>
-				<label for='view-dashboard'>Show Dashboard List</label>
-			</li>
-			<li>
-				<input name='view-submitbox' id='view-submitbox' type="checkbox" value='1'>
-				<label for='view-submitbox'>Show submit box summary</label>
-			</li>
-		</ul>
-		
-		<hr>
-		<input type="submit" class="button action" value="Update">
-	</div>
-	
-	
+		<div class="card">
+			<h3>View Options</h3>
+			
+			<hr>
+			<h4>Social on website</h4>
+			<ul>
+				<li>
+					<input id='view-sidebar' name="smmp_view_sidebar" type="checkbox" value="<?=(int) $options['smmp_view_sidebar']?>">
+					<label for='view-sidebar'>Show social icons in sidebar</label>
+				</li>
+				<li>
+					<input id='view-footer' name="smmp_view_footer" type="checkbox" value="<?=(int) $options['smmp_view_footer']?>">
+					<label for='view-footer'>Show social icons in footer</label>
+				</li>
+			</ul>
+			
+			<hr>
+			<h4>Admin panels</h4>
+			<ul>
+				<li>
+					<input id='view-dashboard' name="smmp_view_dashboard" type="checkbox" value="<?=(int) $options['smmp_view_dashboard']?>">
+					<label for='view-dashboard'>Show Dashboard List</label>
+				</li>
+				<li>
+					<input id='view-submitbox' name="smmp_view_submitbox" type="checkbox" value="<?=(int) $options['smmp_view_submitbox']?>">
+					<label for='view-submitbox'>Show submit box summary</label>
+				</li>
+			</ul>
+			
+			<hr>
+			<input type="submit" class="button action" value="Update">
+		</div>
+	</form>
 </div>

@@ -39,6 +39,8 @@ class SMMP_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+	
+	private $table_name;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -49,8 +51,12 @@ class SMMP_Admin {
 	 */
 	public function __construct( $cloudoki_smmp, $version ) {
 
+		global $wpdb;
+	
 		$this->cloudoki_smmp = $cloudoki_smmp;
 		$this->version = $version;
+		
+		$this->table_name = $wpdb->prefix . "smmp";
 
 	}
 
@@ -144,6 +150,10 @@ class SMMP_Admin {
 	 */
 	public function admin_post_metabox ()
 	{
+		$page = $_GET['page'];
+		
+		echo json_encode ($_GET);
+		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-metabox.php';
 	}
 	
@@ -174,6 +184,34 @@ class SMMP_Admin {
 	 */
 	public function admin_page_accounts ()
 	{
+		if ($_GET['update'])
+		{
+			update_option ('smmp_url_facebook', $_GET['smmp_url_facebook']);
+			update_option ('smmp_url_twitter', $_GET['smmp_url_twitter']);
+			update_option ('smmp_url_instagram', $_GET['smmp_url_instagram']);
+			update_option ('smmp_url_pinterest', $_GET['smmp_url_pinterest']);
+			update_option ('smmp_url_googleplus', $_GET['smmp_url_googleplus']);
+			update_option ('smmp_url_linkedin', $_GET['smmp_url_linkedin']);
+		}
+		
+		$page = $_GET['page'];
+		
+		$options = [
+			'smmp_url_facebook'=> get_option ('smmp_url_facebook'),
+			'smmp_url_twitter'=> get_option ('smmp_url_twitter'),
+			'smmp_url_instagram'=> get_option ('smmp_url_instagram'),
+			'smmp_url_pinterest'=> get_option ('smmp_url_pinterest'),
+			'smmp_url_googleplus'=> get_option ('smmp_url_googleplus'),
+			'smmp_url_linkedin'=> get_option ('smmp_url_linkedin')
+		];
+		
+		// Facebook settings
+		$facebook = json_decode (get_option ('smmp_facebook'), true);
+		$facebook = $facebook[0]?: (object)[];
+		$facebook_path = plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-accounts-facebook.php';
+
+		update_option ('smmp_facebook', json_encode($facebook));
+		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-accounts.php';
 	}
 	
@@ -184,6 +222,23 @@ class SMMP_Admin {
 	 */
 	public function admin_page_settings ()
 	{
+		if ($_GET['update'])
+		{
+			update_option ('smmp_view_sidebar', $_GET['smmp_view_sidebar']);
+			update_option ('smmp_view_footer', $_GET['smmp_view_footer']);
+			update_option ('smmp_view_dashboard', $_GET['smmp_view_dashboard']);
+			update_option ('smmp_view_submitbox', $_GET['smmp_view_submitbox']);
+		}
+		
+		$page = $_GET['page'];
+		
+		$options = [
+			'smmp_view_sidebar'=> get_option ('smmp_view_sidebar'),
+			'smmp_view_footer'=> get_option ('smmp_view_footer'),
+			'smmp_view_dashboard'=> get_option ('smmp_view_dashboard'),
+			'smmp_view_submitbox'=> get_option ('smmp_view_submitbox')
+		];
+		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-settings.php';
 	}
 	
@@ -197,6 +252,29 @@ class SMMP_Admin {
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-dashboard-widget.php';
 	}
 	
+	/**
+	 * SMMP Posts.
+	 *
+	 * Queue or delete SMMP posts, based on WP posts
+	 *
+	 * @since    1.0.0
+	 */
+	public function queue_smmp_post ($post_id, $type)
+	{
+		global $wpdb;
+		
+		$wpdb->insert( $this->table_name, 
+		[ 
+			'post_id' => (int) $post_id, 
+			'type' => $type,
+			'status' => 'pending'
+		]);
+	}
+	
+	public function delete_smmp_post ($post_id, $type)
+	{
+		global $wpdb;
+	}
 	
 	/**
 	 * SMMP Social Accounts - validate.

@@ -31,9 +31,8 @@ class SMMP_Activator {
 		parent_id int(11) NOT NULL,
 		type varchar(32) DEFAULT '' NOT NULL,
 		alteration text NOT NULL,
-		alteration text NOT NULL,
 		publish_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		state varchar(32) DEFAULT '' NOT NULL,
+		status varchar(32) DEFAULT '' NOT NULL,
 		
 		UNIQUE KEY id (id)
 	) %s;";
@@ -61,7 +60,7 @@ class SMMP_Activator {
 	public static function generate_table ()
 	{
 		global $wpdb;
-
+		
 		$table_name = $wpdb->prefix . "smmp";
 		$charset_collate = $wpdb->get_charset_collate();
 		
@@ -77,6 +76,12 @@ class SMMP_Activator {
 	{
 		// Record db version
 		add_option( "smmp_db_version", SMMP::$db_version );
+		
+		// View options
+		add_option("smmp_view_sidebar", '1');
+		add_option("smmp_view_footer", '1');
+		add_option("smmp_view_dashboard", '1');
+		add_option("smmp_view_submitbox", '1');
 		
 		// Short url for customised links
 		add_option( "smmp_short_url", '' );
