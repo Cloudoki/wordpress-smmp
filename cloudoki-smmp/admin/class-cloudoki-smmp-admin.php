@@ -331,6 +331,37 @@ class SMMP_Admin {
 	}
 	
 	/**
+	 *	Update smmp post record
+	 *	
+	 *	@param	mixed	$identifier	smmp record id or tuple (array) with post id and smmp record type
+	 *	@param	array	$contents	the fields to be updated
+	 */
+	public function update_smmp_post ($identifier, $status, $alteration, $publish_date)
+	{
+		global $wpdb;
+		
+		// define 
+		
+		$wpdb->update( $this->table_name, 
+			$data, 
+			$where, 
+			$format = null, 
+			$where_format = null
+		);
+	}
+	
+	/**
+	 *	Update smmp post records
+	 */
+	public function update_smmp_posts ($post_id, $typelist)
+	{
+		foreach ($typelist as $type)
+		
+			$this->queue_smmp_post ($post_id, $type);
+	}
+	
+	
+	/**
 	 *	Delete one or more smmp publications
 	 */
 	public function delete_smmp_post ($post_id, $type = null)
