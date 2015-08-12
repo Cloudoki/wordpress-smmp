@@ -50,6 +50,9 @@ var smmp_admin =
 		// Connect buttons
 		jQuery('#connect-facebook').on('click', this.connect_facebook);
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
+
+		// smmp publish action buttons
+		jQuery('.smmp-share-button').click(function(){jQuery(this).toggleClass('selected')});
 	},
 	
 	connect_facebook: function ()

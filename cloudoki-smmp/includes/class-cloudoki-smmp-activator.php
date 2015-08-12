@@ -31,9 +31,8 @@ class SMMP_Activator {
 		parent_id int(11) NOT NULL,
 		type varchar(32) DEFAULT '' NOT NULL,
 		alteration text NOT NULL,
-		alteration text NOT NULL,
 		publish_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		state varchar(32) DEFAULT '' NOT NULL,
+		status varchar(32) DEFAULT '' NOT NULL,
 		
 		UNIQUE KEY id (id)
 	) %s;";

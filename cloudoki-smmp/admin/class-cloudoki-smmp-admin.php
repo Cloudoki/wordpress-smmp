@@ -156,6 +156,16 @@ class SMMP_Admin {
 	{
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
 	}
+
+	/**
+	 * Update/Sumbit post submitbox
+	 *
+	 * @since    1.0.0
+	 */
+	public function admin_post_submitbox_submit ()
+	{
+		
+	}
 	
 	/**
 	 * SMMP Publication List - admin page content.

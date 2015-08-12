@@ -176,6 +176,7 @@ class SMMP {
 		// Load Edit Post additions
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'admin_post' );
 		$this->loader->add_action( 'post_submitbox_misc_actions', $plugin_admin, 'admin_post_submitbox' );
+		$this->loader->add_action( 'save_post', $plugin_admin, 'admin_post_submitbox_submit');
 		
 		
 		// Load Expired Account notice

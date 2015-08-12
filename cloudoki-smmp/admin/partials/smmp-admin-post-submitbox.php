@@ -12,11 +12,23 @@
 ?>
 
 <div class="misc-pub-section misc-pub-smmp">
-	
+	<label>Publish:</label>
 	<ul>
-		<li><span class="dashicons dashicons-facebook-alt"></span></li>
-		<li><label class='fb-page'><span class="dashicons dashicons-facebook-alt"></span> EL</label></li>
-		<li><span class="dashicons dashicons-twitter"></span></li>
+		<li>
+			<a class="button smmp-share-button">
+				<span class="dashicons dashicons-facebook-alt"></span>
+			</a>
+		</li>
+		<li>
+			<a class="button smmp-share-button">
+				<span class="dashicons dashicons-facebook-alt"></span>
+			</a>
+		</li>
+		<li>
+			<a class="button smmp-share-button">
+				<span class="dashicons dashicons-twitter"></span>
+			</a>
+		</li>
 	</ul>
 
 </div>
