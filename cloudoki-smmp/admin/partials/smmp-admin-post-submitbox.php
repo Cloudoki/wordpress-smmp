@@ -16,7 +16,7 @@
 	<ul>
 		<li>
 			<a class="button smmp-share-button <?php if ($fb_active) echo 'active' ?>">
-				<input type="checkbox" name="smmp-share-facebook" value="smmp-facebook" <?php if ($fb_active) echo 'checked' ?>>
+				<input type="checkbox" name="smmp-share-facebook" value="<?php $fb_active ?>" <?php if ($fb_active) echo 'checked' ?>>
 				<span class="dashicons dashicons-facebook-alt"></span>
 				<div class="pub-status">
 					<span class="dashicons dashicons-yes"></span>
@@ -25,7 +25,7 @@
 		</li>
 		<li>
 			<a class="button smmp-share-button <?php if ($twt_active) echo 'active' ?>">
-				<input type="checkbox" name="smmp-share-twitter" value="smmp-twitter" <?php if ($twt_active) echo 'checked' ?>>
+				<input type="checkbox" name="smmp-share-twitter" value="<?php $twt_active ?>" <?php if ($twt_active) echo 'checked' ?>>
 				<span class="dashicons dashicons-twitter"></span>
 				<div class="pub-status">
 					<span class="dashicons dashicons-yes"></span>

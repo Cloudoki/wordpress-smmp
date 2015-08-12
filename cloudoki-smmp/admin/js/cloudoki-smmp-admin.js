@@ -52,7 +52,7 @@ var smmp_admin =
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
 
 		// smmp publish action buttons
-		jQuery('.misc-pub-smmp.scheduled .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
+		jQuery('.misc-pub-smmp.pending .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
 	},
 	
 	update_option: function (el)
@@ -90,7 +90,7 @@ var smmp_admin =
 	toggle_smmp_share: function(button)
 	{
 		button.toggleClass('active');
-		button.find('input').prop("checked", button.hasClass('active'));
+		button.find('input').prop("checked", button.hasClass('active')).val(button.hasClass('active'));
 	}
 }
 

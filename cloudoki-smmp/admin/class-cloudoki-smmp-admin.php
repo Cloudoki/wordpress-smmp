@@ -162,19 +162,32 @@ class SMMP_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function admin_post_submitbox ()
-	{
+	public function admin_post_submitbox ($post_id)
+	{	
+		// update this to dynamic
 		$tempdata = array(
-			'facebook' => array( 'status' => 'scheduled', 'type' => 'facebook' ),
-			'twitter' => array( 'status' => 'unscheduled', 'type' => 'twitter' )
+			'facebook' => array( 'status' => 'pending', 'type' => 'facebook' ),
+			'twitter' => array( 'status' => '', 'type' => 'twitter' )
 		);
 
-		$status_class = 'published';
+		$post_status = get_post_status($post_id);
+		$status_class = $post_status == 'future'? 'pending': $post_status;
 
-		$fb_active = $tempdata['facebook']['status'] == 'scheduled' || $tempdata['facebook']['status'] == 'published'? true: false;
-		$twt_active = $tempdata['twitter']['status'] == 'scheduled' || $tempdata['twitter']['status'] == 'published'? true: false;
+		$fb_active = $tempdata['facebook']['status'] == 'pending' || $tempdata['facebook']['status'] == 'published'? true: false;
+		$twt_active = $tempdata['twitter']['status'] == 'pending' || $tempdata['twitter']['status'] == 'published'? true: false;
 
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
+	}
+
+	/**
+	 * Reads the submibox's toggles on submit - remake in a dynamic way
+	 *
+	 * @since    1.0.0
+	 */
+	public function admin_post_submitbox_submit ($post_id) {
+
+		if ($_POST['smmp-share-facebook']) $this->queue_smmp_post($post_id, 'facebook');
+		if ($_POST['smmp-share-twitter']) $this->queue_smmp_post($post_id, 'twitter');
 	}
 	
 	/**
@@ -311,13 +324,13 @@ class SMMP_Admin {
 	public function queue_smmp_post ($post_id, $type)
 	{
 		global $wpdb;
-		
-		$wpdb->insert( $this->table_name, 
+
+		wp_die($wpdb->insert( $this->table_name, 
 		[ 
 			'post_id' => (int) $post_id, 
 			'type' => $type,
 			'status' => 'pending'
-		]);
+		]));
 	}
 	
 	/**

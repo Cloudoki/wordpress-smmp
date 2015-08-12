@@ -76,7 +76,7 @@
     color: #fff;
 }
 
-.misc-pub-smmp.scheduled .smmp-share-button.active {
+.misc-pub-smmp.pending .smmp-share-button.active {
 	background: #eee;
     border-color: #999;
     color: #32373c;
