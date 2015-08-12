@@ -224,10 +224,10 @@ class SMMP_Admin {
 	{
 		if ($_GET['update'])
 		{
-			update_option ('smmp_view_sidebar', $_GET['smmp_view_sidebar']);
-			update_option ('smmp_view_footer', $_GET['smmp_view_footer']);
-			update_option ('smmp_view_dashboard', $_GET['smmp_view_dashboard']);
-			update_option ('smmp_view_submitbox', $_GET['smmp_view_submitbox']);
+			update_option ('smmp_view_sidebar', $_GET['smmp_view_sidebar']? 1: '');
+			update_option ('smmp_view_footer', $_GET['smmp_view_footer']? 1: '');
+			update_option ('smmp_view_dashboard', $_GET['smmp_view_dashboard']? 1: '');
+			update_option ('smmp_view_submitbox', $_GET['smmp_view_submitbox']? 1: '');
 		}
 		
 		$page = $_GET['page'];
@@ -255,9 +255,48 @@ class SMMP_Admin {
 	/**
 	 * SMMP Posts.
 	 *
-	 * Queue or delete SMMP posts, based on WP posts
+	 * Get, Queue or delete SMMP posts, based on WP posts.
+	 * Caution: the paramaters are strictly typed.
 	 *
 	 * @since    1.0.0
+	 */
+	
+	/**
+	 *	Get smmp record, on id
+	 *
+	 *	@param	int		$smmp_id	id of smmp record
+	 *	@return	object
+	 */
+	public function get_smmp_post ($smmp_id)
+	{
+		global $wpdb;
+		
+		return $wpdb->get_row(sprintf( "SELECT * FROM %s WHERE id = %d", $this->table_name, $smmp_id));
+	}
+	
+	/**
+	 *	Get smmp records
+	 *
+	 *	@param	int		$post_id	id of wp post record
+	 *	@param	array	$types		list of types
+	 *	@param	string	$status		smmp record status
+	  *	@return	object
+	 */
+	public function get_smmp_posts ($post_id, $types = null, $status = null)
+	{
+		global $wpdb;
+		
+		$types_query = $types? sprintf( " AND type IN('%s')", implode("','", $types)): "";
+		$status_query = $status? sprintf( " AND status = '%s'", $status): "";
+		
+		return $wpdb->get_results(sprintf( "SELECT * FROM %s WHERE post_id = %d%s%s", $this->table_name, $post_id, $types_query, $status_query));
+	}
+	 
+	/**
+	 *	Queue smmp publication
+	 *
+	 *	@param	int		$post_id	id of wp post record
+	 *	@param	string	$type		type of smmp record	
 	 */
 	public function queue_smmp_post ($post_id, $type)
 	{
@@ -271,9 +310,24 @@ class SMMP_Admin {
 		]);
 	}
 	
-	public function delete_smmp_post ($post_id, $type)
+	/**
+	 *	Queue smmp multiple publications
+	 */
+	public function queue_smmp_posts ($post_id, $typelist)
+	{
+		foreach ($typelist as $type)
+		
+			$this->queue_smmp_post ($post_id, $type);
+	}
+	
+	/**
+	 *	Delete one or more smmp publications
+	 */
+	public function delete_smmp_post ($post_id, $type = null)
 	{
 		global $wpdb;
+		
+		// if no type is given, all records should be flagged deleted.
 	}
 	
 	/**

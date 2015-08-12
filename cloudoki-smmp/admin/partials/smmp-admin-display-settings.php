@@ -37,11 +37,11 @@
 			<h4>Social on website</h4>
 			<ul>
 				<li>
-					<input id='view-sidebar' name="smmp_view_sidebar" type="checkbox" value="<?=(int) $options['smmp_view_sidebar']?>">
+					<input id='view-sidebar' name="smmp_view_sidebar" type="checkbox" <?=(int) $options['smmp_view_sidebar']? "checked='checked'": "" ?>>
 					<label for='view-sidebar'>Show social icons in sidebar</label>
 				</li>
 				<li>
-					<input id='view-footer' name="smmp_view_footer" type="checkbox" value="<?=(int) $options['smmp_view_footer']?>">
+					<input id='view-footer' name="smmp_view_footer" type="checkbox" <?=(int) $options['smmp_view_footer']? "checked='checked'": "" ?>>
 					<label for='view-footer'>Show social icons in footer</label>
 				</li>
 			</ul>
@@ -50,11 +50,11 @@
 			<h4>Admin panels</h4>
 			<ul>
 				<li>
-					<input id='view-dashboard' name="smmp_view_dashboard" type="checkbox" value="<?=(int) $options['smmp_view_dashboard']?>">
+					<input id='view-dashboard' name="smmp_view_dashboard" type="checkbox" <?=(int) $options['smmp_view_dashboard']? "checked='checked'": "" ?>>
 					<label for='view-dashboard'>Show Dashboard List</label>
 				</li>
 				<li>
-					<input id='view-submitbox' name="smmp_view_submitbox" type="checkbox" value="<?=(int) $options['smmp_view_submitbox']?>">
+					<input id='view-submitbox' name="smmp_view_submitbox" type="checkbox" <?=(int) $options['smmp_view_submitbox']? "checked='checked'": "" ?>>
 					<label for='view-submitbox'>Show submit box summary</label>
 				</li>
 			</ul>
