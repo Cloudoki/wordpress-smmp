@@ -14,7 +14,7 @@
 ?>
 
 <div class="wrap">
-	<h2>SMMP Settings [should be dynamic]</h2>
+	<h2><?=$title?></h2>
 	
 	<form action="">
 		<input type="hidden" name="page" value="<?=$page?>">

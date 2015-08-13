@@ -11,12 +11,12 @@
  */
 ?>
 
-<div class="misc-pub-section misc-pub-smmp <?php echo $status_class ?>">
+<div class="misc-pub-section misc-pub-smmp <?=$status_class?>">
 	<label>Publish:</label>
 	<ul>
 		<li>
-			<a class="button smmp-share-button <?php if ($fb_active) echo 'active' ?>">
-				<input type="checkbox" name="smmp-share-facebook" value="<?php $fb_active ?>" <?php if ($fb_active) echo 'checked' ?>>
+			<a class="button smmp-share-button <?=$fb_active_class?>">
+				<input type="checkbox" name="smmp-share-facebook" value="<=$fb_active?>" <?=$fb_checked?>>
 				<span class="dashicons dashicons-facebook-alt"></span>
 				<div class="pub-status">
 					<span class="dashicons dashicons-yes"></span>
@@ -24,8 +24,8 @@
 			</a>
 		</li>
 		<li>
-			<a class="button smmp-share-button <?php if ($twt_active) echo 'active' ?>">
-				<input type="checkbox" name="smmp-share-twitter" value="<?php $twt_active ?>" <?php if ($twt_active) echo 'checked' ?>>
+			<a class="button smmp-share-button <?=$twt_active_class?>">
+				<input type="checkbox" name="smmp-share-twitter" value="<?=$twt_active?>" <?=$twt_checked?>>
 				<span class="dashicons dashicons-twitter"></span>
 				<div class="pub-status">
 					<span class="dashicons dashicons-yes"></span>

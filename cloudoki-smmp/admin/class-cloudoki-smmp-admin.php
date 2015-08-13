@@ -169,8 +169,13 @@ class SMMP_Admin {
 		$post_status = get_post_status($post_id);
 		$status_class = $post_status == 'future'? 'pending': $post_status;
 
-		$fb_active = $tempdata['facebook']['status'] == 'pending' || $tempdata['facebook']['status'] == 'published'? true: false;
-		$twt_active = $tempdata['twitter']['status'] == 'pending' || $tempdata['twitter']['status'] == 'published'? true: false;
+		$fb_active = in_array($tempdata['facebook']['status'], array('pending', 'published'));
+		$fb_active_class = $fb_active? 'active': '';
+		$fb_checked = $fb_active? 'checked': '';
+
+		$twt_active = in_array($tempdata['twitter']['status'], array('pending', 'published'));
+		$twt_active_class = $twt_active? 'active': '';
+		$twt_checked = $twt_active? 'checked': '';
 
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
 	}
@@ -193,6 +198,8 @@ class SMMP_Admin {
 	 */
 	public function admin_page_list ()
 	{
+		$title = get_admin_page_title();
+
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-list.php';
 	}
 	
@@ -244,6 +251,8 @@ class SMMP_Admin {
 	 */
 	public function admin_page_settings ()
 	{
+		$title = get_admin_page_title();
+
 		if ($_GET['update'])
 		{
 			update_option ('smmp_view_sidebar', isset ($_GET['smmp_view_sidebar'])? 1: '');

@@ -17,10 +17,7 @@
 
 <div class="wrap">
 
-	<h2>
-		[Title should be dynamic]
-		<!--<a href="#" class="add-new-h2">Add New</a>-->
-	</h2>
+	<h2><?=$title?></h2>
 	
 	<ul class="subsubsub">
 		<li class="all"><a href="#" class="current">All <span class="count">(n)</span></a> |</li>
