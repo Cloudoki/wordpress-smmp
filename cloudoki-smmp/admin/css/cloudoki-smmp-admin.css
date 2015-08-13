@@ -3,11 +3,15 @@
  */
 
 /**
- * SMMP plagin pages
+ * SMMP plugin pages
  */
 .smmp-admin-page input[type="text"],
 .smmp-admin-page input[type="url"]	{
 	width: 100%;
+}
+
+.smmp-admin-page .display-hidden	{
+	display: none;
 }
 
 /**

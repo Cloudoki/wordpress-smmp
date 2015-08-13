@@ -22,22 +22,21 @@
 	
 		<div class="card">
 			<h3>Facebook</h3>
-			<p class='info'>
-				Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
-			</p>
+			<div id="facebook-logged-out">
 			
-			<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook" disabled="disabled">
+				<p class='info'>
+					Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
+				</p>
 			
-			<hr>
+				<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook" disabled="disabled">
 			
-			<?php if(isset($facebook->profile)) include $facebook_path;
-				  else { 	
-			?>
+				<hr>
+				
+				<p>Don't feel like connecting right now? Add your Facebook Page link for sharing.</p>
+				<input type="url" placeholder="Facebook Page url" name="smmp_url_facebook" value="<?=$options['smmp_url_facebook']?>" />
+			</div>
 			
-			<p>Don't feel like connecting right now? Add your Facebook Page link for sharing.</p>
-			<input type="url" placeholder="Facebook Page url" name="smmp_url_facebook" value="<?=$options['smmp_url_facebook']?>" />
-			
-			<?php } ?>
+			<?php if(isset($facebook->profile)) include $facebook_path; ?>
 			
 			<hr>
 			<input type="submit" class="button action update_option" value="Update">
