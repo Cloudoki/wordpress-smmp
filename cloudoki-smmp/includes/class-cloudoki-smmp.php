@@ -175,7 +175,12 @@ class SMMP {
 		
 		// Load Edit Post additions
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'admin_post' );
-		$this->loader->add_action( 'post_submitbox_misc_actions', $plugin_admin, 'admin_post_submitbox' );
+
+		// Load social toggles on submitbox, if the setting is available
+		if (get_option('smmp_view_submitbox'))
+			$this->loader->add_action( 'post_submitbox_misc_actions', $plugin_admin, 'admin_post_submitbox' );
+		
+		// On post update/save
 		$this->loader->add_action( 'save_post', $plugin_admin, 'admin_post_submitbox_submit');
 		
 		
