@@ -150,9 +150,7 @@ class SMMP_Admin {
 	 */
 	public function admin_post_metabox ()
 	{
-		$page = $_GET['page'];
-		
-		echo json_encode ($_GET);
+		echo json_encode($this->available_types ());
 		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-metabox.php';
 	}
@@ -300,7 +298,7 @@ class SMMP_Admin {
 		if (count ($facebook))
 		{
 			$list[] = 'facebook';
-			foreach ($facebook->pages as $page)
+			foreach ($facebook[0]->pages as $page)
 			
 				$list[] = sprintf ("facebook-%s", sanitize_title ($page->name)); 
 		}
