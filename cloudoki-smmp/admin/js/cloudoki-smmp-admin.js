@@ -50,11 +50,8 @@ var smmp_admin =
 {
 	init : function ()
 	{
-		// Connect buttons
-		jQuery('#connect-facebook').on('click', this.connect_facebook);
+		// Connect and publish buttons
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
-
-		// smmp publish action buttons
 		jQuery('.misc-pub-smmp.pending .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
 		
 		// load Facebook
@@ -62,32 +59,59 @@ var smmp_admin =
 		jQuery.getScript('//connect.facebook.net/en_US/sdk.js', smmp_admin.init_facebook);
 	},
 	
-	update_option: function (el)
-	{
-		//var input = jQuery(this).parent().find('input[data-option]');
-		//window.location = "&" + input.data('option') + "=" + input.value;
-	},
-	
 	init_facebook : function ()
 	{
-		jQuery('#connect-facebook').removeAttr('disabled');
-		
+
 		FB.init({
 			appId: '637599113043974',
 			version: 'v2.4'
 		});
-		    
+		
+		FB.getLoginStatus(function(response)
+		{
+			if (response.status === 'connected')
+			{
+				smmp_admin.display_facebook_logged_out(false);
+				smmp_admin.display_facebook_details(true);
+			} 
+
+			else FB.login(function(response){ console.log(response) }, {scope: 'public_profile'});
+		});	
+	},
+	
+	display_facebook_logged_out: function (show)
+	{
+		if(show)
+			
+			jQuery('#facebook-logged-out')
+				.removeClass('display-hidden')
+				
+				.find('#connect-facebook')
+					.removeAttr('disabled')
+					.on('click', this.connect_facebook);
+		else 
+			
+			jQuery('#facebook-logged-out').addClass('display-hidden');
+	},
+	
+	display_facebook_details: function (show)
+	{
+		// display
+		jQuery('#facebook-details')[show? 'removeClass': 'addClass']('display-hidden');
+		
+		// compare data
+		if (show)
+		{
+			FB.api('/me/accounts', function(response) {
+				console.log(response);
+			});
+		}		
 		
 	},
 	
 	connect_facebook: function ()
 	{
-		FB.getLoginStatus(function(response)
-		{
-			if (response.status === 'connected') console.log('Logged in.');
-
-			else FB.login(function(response){ console.log(response) }, {scope: 'public_profile'});
-		});	
+		FB.login(function(response){ console.log(response) }, {scope: 'public_profile,publish_actions,manage_pages,publish_pages'});
 		
 		/*window.fbAsyncInit = function() {
 			FB.init({

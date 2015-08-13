@@ -12,16 +12,19 @@
  * @subpackage SMMP/admin/partials
  */
 
-	if(isset ($facebook->pages)) { ?>
+if(isset ($facebook->pages)) { ?>
+	
+		<div id="facebook-details" class="display-hidden">
 		
-		<p>Select your Facebook Pages</p>
-	
-		<ul>
-			<?php foreach ($facebook->pages as $page) { ?>
-			<li>
-				<input type="checkbox" name="fb-<?=$page->name?>" value="<?=$page->active?>">
-				<?=$page->name?>
-			</li>
-		</ul>
-	
-	<?php }} ?>
+			<p>Select your Facebook Pages</p>
+		
+			<ul>
+				<?php foreach ($facebook->pages as $page) { ?>
+				<li>
+					<input type="checkbox" name="fb-<?=$page->name?>" value="<?=$page->active?>">
+					<?=$page->name?>
+				</li>
+			</ul>
+		</div>
+
+<?php }} ?>

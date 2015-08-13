@@ -210,8 +210,6 @@ class SMMP_Admin {
 	 */
 	public function admin_page_accounts ()
 	{
-		$title = get_admin_page_title();
-
 		
 		if ($_GET['update'])
 		{
@@ -224,6 +222,7 @@ class SMMP_Admin {
 		}
 		
 		$page = $_GET['page'];
+		$title = get_admin_page_title();
 		
 		$options = [
 			'smmp_url_facebook'=> get_option ('smmp_url_facebook'),
