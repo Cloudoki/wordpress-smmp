@@ -291,13 +291,13 @@ class SMMP_Admin {
 	 */
 	public function available_types ()
 	{
-		$facebook = (json_decode (get_option ('smmp_facebook')))[0];
-		$twitter = (json_decode (get_option ('smmp_twitter')))[0];
+		$facebook = json_decode (get_option ('smmp_facebook'));
+		$twitter = json_decode (get_option ('smmp_twitter'));
 		
 		$list = [];
 		
 		// Check Facebook
-		if ($facebook)
+		if (count ($facebook))
 		{
 			$list[] = 'facebook';
 			foreach ($facebook->pages as $page)
@@ -306,7 +306,7 @@ class SMMP_Admin {
 		}
 		
 		// Check twitter
-		if ($twitter) $list[] = 'twitter';
+		if (count ($twitter)) $list[] = 'twitter';
 		
 		// result
 		return $list;
