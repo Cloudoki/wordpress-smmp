@@ -16,7 +16,7 @@
 	<ul>
 		<li>
 			<a class="button smmp-share-button <?=$fb_active_class?>">
-				<input type="checkbox" name="smmp-share-facebook" value="<=$fb_active?>" <?=$fb_checked?>>
+				<input type="checkbox" name="smmp-share-facebook" value="<?=$fb_active?>" <?=$fb_checked?>>
 				<span class="dashicons dashicons-facebook-alt"></span>
 				<div class="pub-status">
 					<span class="dashicons dashicons-yes"></span>

@@ -187,6 +187,33 @@ class SMMP_Admin {
 	 */
 	public function admin_post_submitbox_submit ($post_id) {
 
+		$types = $this->available_types();
+		$posts = $this->get_smmp_posts($post_id, $types);
+		$toggled = [];
+
+		// Get toggled status
+		foreach($types as $type) {
+			if (array_key_exists('smmp-share-'.$type, $_POST)) {
+				$toggled[] = $type;
+			}
+		}
+
+		// Mark as deleted
+		foreach($posts as $post) {
+			if (!in_array($post['type'], $toggled)) {
+				// set the delete status
+			} else {
+				// update
+			}
+		}
+
+		// Add unexisting
+		//$this->queue_smmp_posts($post_id, $toggled);
+
+		foreach($types as $type) {
+			
+		}
+
 		if ($_POST['smmp-share-facebook']) $this->queue_smmp_post($post_id, 'facebook');
 		if ($_POST['smmp-share-twitter']) $this->queue_smmp_post($post_id, 'twitter');
 	}
