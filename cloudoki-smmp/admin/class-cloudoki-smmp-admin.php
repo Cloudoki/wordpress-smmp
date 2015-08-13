@@ -150,8 +150,6 @@ class SMMP_Admin {
 	 */
 	public function admin_post_metabox ()
 	{
-		echo json_encode($this->available_types ());
-		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-metabox.php';
 	}
 	
@@ -351,12 +349,12 @@ class SMMP_Admin {
 	{
 		global $wpdb;
 
-		wp_die($wpdb->insert( $this->table_name, 
+		return $wpdb->insert( $this->table_name, 
 		[ 
 			'post_id' => (int) $post_id, 
 			'type' => $type,
 			'status' => 'pending'
-		]));
+		]);
 	}
 	
 	/**
