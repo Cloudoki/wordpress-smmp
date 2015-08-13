@@ -247,10 +247,10 @@ class SMMP_Admin {
 	{
 		if ($_GET['update'])
 		{
-			update_option ('smmp_view_sidebar', $_GET['smmp_view_sidebar']? 1: '');
-			update_option ('smmp_view_footer', $_GET['smmp_view_footer']? 1: '');
-			update_option ('smmp_view_dashboard', $_GET['smmp_view_dashboard']? 1: '');
-			update_option ('smmp_view_submitbox', $_GET['smmp_view_submitbox']? 1: '');
+			update_option ('smmp_view_sidebar', isset ($_GET['smmp_view_sidebar'])? 1: '');
+			update_option ('smmp_view_footer', isset ($_GET['smmp_view_footer'])? 1: '');
+			update_option ('smmp_view_dashboard', isset ($_GET['smmp_view_dashboard'])? 1: '');
+			update_option ('smmp_view_submitbox', isset ($_GET['smmp_view_submitbox'])? 1: '');
 		}
 		
 		$page = $_GET['page'];
@@ -283,6 +283,34 @@ class SMMP_Admin {
 	 *
 	 * @since    1.0.0
 	 */
+	 
+	/**
+	 *	Get available types
+	 *
+	 *	@return	object
+	 */
+	public function available_types ()
+	{
+		$facebook = (json_decode (get_option ('smmp_facebook')))[0];
+		$twitter = (json_decode (get_option ('smmp_twitter')))[0];
+		
+		$list = [];
+		
+		// Check Facebook
+		if ($facebook)
+		{
+			$list[] = 'facebook';
+			foreach ($facebook->pages as $page)
+			
+				$list[] = sprintf ("facebook-%s", sanitize_title ($page->name)); 
+		}
+		
+		// Check twitter
+		if ($twitter) $list[] = 'twitter';
+		
+		// result
+		return $list;
+	}
 	
 	/**
 	 *	Get smmp record, on id
