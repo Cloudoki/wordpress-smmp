@@ -14,7 +14,7 @@
 ?>
 
 <div class="wrap smmp-admin-page">
-	<h2>Social Accounts [should be dynamic]</h2>
+	<h2><?=$title?></h2>
 	
 	<form action="">
 		<input type="hidden" name="page" value="<?=$page?>">
@@ -26,7 +26,7 @@
 				Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
 			</p>
 			
-			<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook">
+			<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook" disabled="disabled">
 			
 			<hr>
 			

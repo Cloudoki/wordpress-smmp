@@ -203,6 +203,9 @@ class SMMP_Admin {
 	 */
 	public function admin_page_accounts ()
 	{
+		$title = get_admin_page_title();
+
+		
 		if ($_GET['update'])
 		{
 			update_option ('smmp_url_facebook', $_GET['smmp_url_facebook']);

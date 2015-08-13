@@ -1,10 +1,8 @@
-(function( $ ) {
-	'use strict';
+//(function( $ ) {
+//	'use strict';
 
-	$( window ).load(function()
-	{
-		smmp_admin.init ();
-	});
+	//$( window ).load(function()
+	
 
 	/**
 	 * All of the code for your admin-specific JavaScript source
@@ -34,7 +32,12 @@
 	 * be doing this, we should try to minimize doing that in our own work.
 	 */
 
-})( jQuery );
+//})( jQuery );
+
+jQuery(document).ready(function()
+{
+	smmp_admin.init ();
+});
 
 
 /**
@@ -53,6 +56,10 @@ var smmp_admin =
 
 		// smmp publish action buttons
 		jQuery('.misc-pub-smmp.pending .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
+		
+		// load Facebook
+		jQuery.ajaxSetup({ cache: true });
+		jQuery.getScript('//connect.facebook.net/en_US/sdk.js', smmp_admin.init_facebook);
 	},
 	
 	update_option: function (el)
@@ -61,10 +68,28 @@ var smmp_admin =
 		//window.location = "&" + input.data('option') + "=" + input.value;
 	},
 	
+	init_facebook : function ()
+	{
+		jQuery('#connect-facebook').removeAttr('disabled');
+		
+		FB.init({
+			appId: '637599113043974',
+			version: 'v2.4'
+		});
+		    
+		
+	},
+	
 	connect_facebook: function ()
 	{
+		FB.getLoginStatus(function(response)
+		{
+			if (response.status === 'connected') console.log('Logged in.');
+
+			else FB.login(function(response){ console.log(response) }, {scope: 'public_profile'});
+		});	
 		
-		window.fbAsyncInit = function() {
+		/*window.fbAsyncInit = function() {
 			FB.init({
 				appId      : '637599113043974',
 				xfbml      : true,
@@ -78,7 +103,7 @@ var smmp_admin =
 			js = d.createElement(s); js.id = id;
 			js.src = "//connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+		}(document, 'script', 'facebook-jssdk'));*/
 
 	},
 	
