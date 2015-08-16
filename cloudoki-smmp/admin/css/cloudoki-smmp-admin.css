@@ -14,6 +14,30 @@
 	display: none;
 }
 
+.smmp-admin-page .right { float: right; }
+.smmp-admin-page .info { font-style: italic; color: #666; }
+
+/* Facebook */
+.facebook-page	{
+	padding: 0 40% 5px 0; border-bottom: 1px solid #efefef;
+}
+
+.primary-label-button {
+	border: 1px solid #eee; border-radius: 8px; padding: 1px 8px 2px; margin-top: -2px; cursor: pointer;
+	font-size: .9em; color: #aaa;
+}
+
+.primary-label-button.active {
+	border: 1px solid white; background: #73ADF9;
+	color: white;
+}
+
+.smmp-admin-page .disconnect	{
+	padding: 10px; cursor: pointer;
+	color: #73ADF9; line-height: 2em; text-decoration: underline;
+}
+.smmp-admin-page .disconnect:hover	{ color: #7D0109; }
+
 /**
  * Edit Post - Submitbox
  */

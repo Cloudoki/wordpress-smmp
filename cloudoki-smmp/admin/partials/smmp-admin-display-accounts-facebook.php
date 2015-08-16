@@ -10,21 +10,52 @@
  *
  * @package    SMMP
  * @subpackage SMMP/admin/partials
- */
+ */ ?>
 
-if(isset ($facebook->pages)) { ?>
+	<h3>Facebook</h3>
+			
+	<div id="facebook-logged-out">
 	
-		<div id="facebook-details" class="display-hidden">
+		<p class='info'>
+			Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
+		</p>
+	
+		<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook" disabled="disabled">
+	
+		<hr>
 		
-			<p>Select your Facebook Pages</p>
+		<p>Don't feel like connecting right now? Add your Facebook Page link for sharing.</p>
+		<input type="url" placeholder="Facebook Page url" name="smmp_url_facebook" value="<?=$options['smmp_url_facebook']?>" />
+	</div>
 		
-			<ul>
-				<?php foreach ($facebook->pages as $page) { ?>
-				<li>
-					<input type="checkbox" name="fb-<?=$page->name?>" value="<?=$page->active?>">
-					<?=$page->name?>
-				</li>
-			</ul>
-		</div>
-
-<?php }} ?>
+	<div id="facebook-details" class="display-hidden" data-fb-profile="<?=$facebook->profile?>">
+		
+		<input type="hidden" id="fb-profile">
+		<input type="hidden" id="fb-id">
+		<input type="hidden" id="fb-primary" value="<?=$facebook->primary?>">
+		
+		<p>Select your Facebook Pages</p>
+		
+		<ul>
+			<?php if(isset ($facebook->pages))
+				
+			foreach ($facebook->pages as $slug => $page) { ?>
+			<li class='facebook-page'>
+				<input type="checkbox" name="<?=$slug?>" id="<?=$slug?>" checked="checked">
+				<span data-target="<?=$slug?>" class="primary-label-button right<?=$slug==$facebook->primary? ' active':null?>">primary</span>
+				<label for="<?=$slug?>"><?=$page->name?></label>
+			</li>
+			<?php } ?>
+		</ul>
+		
+		<!-- template -->
+		<li id="fb-page-template" class="display-hidden facebook-page">
+			<input type="checkbox">
+			<span class="primary-label-button right">primary</span>
+			<label></label>
+		</li>
+		
+		<p id="fb-default-primary" class="info<?=$facebook->primary? ' display-hidden':null?>">
+			Your Facebook profile is the primary selection.
+		</p>
+	</div>

@@ -17,29 +17,16 @@
 	<h2><?=$title?></h2>
 	
 	<form action="">
-		<input type="hidden" name="page" value="<?=$page?>">
-		<input type="hidden" name="update" value=1>
+		<input type="hidden" id="page-field" name="page" value="<?=$page?>">
+		<input type="hidden" name="admin-update" value="1">
 	
 		<div class="card">
-			<h3>Facebook</h3>
-			<div id="facebook-logged-out">
 			
-				<p class='info'>
-					Connect your Facebook account, so you can manage and publish your posts on your timeline. Select the pages you wish to manage from here as well.
-				</p>
-			
-				<input type="button" id="connect-facebook" class="button button-primary button-hero" value="Connect to Facebook" disabled="disabled">
-			
-				<hr>
-				
-				<p>Don't feel like connecting right now? Add your Facebook Page link for sharing.</p>
-				<input type="url" placeholder="Facebook Page url" name="smmp_url_facebook" value="<?=$options['smmp_url_facebook']?>" />
-			</div>
-			
-			<?php if(isset($facebook->profile)) include $facebook_path; ?>
+			<?php include $facebook_path; ?>
 			
 			<hr>
 			<input type="submit" class="button action update_option" value="Update">
+			<span id='fb-disconnect' class="disconnect"></span>
 		</div>
 		
 		<div class="card">

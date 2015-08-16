@@ -87,10 +87,10 @@ class SMMP_Activator {
 		add_option( "smmp_short_url", '' );
 		
 		// Facebook collection
-		add_option( "smmp_facebook", '[]' );
+		add_option( "smmp_facebook", '{}' );
 		
 		// Twitter collection
-		add_option( "smmp_twitter", '[]' );
+		add_option( "smmp_twitter", '{}' );
 		
 		// Facebook Account URL
 		add_option( "smmp_url_facebook", '' );
