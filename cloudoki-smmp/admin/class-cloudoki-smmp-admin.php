@@ -231,10 +231,6 @@ class SMMP_Admin {
 	public function admin_page_list ()
 	{
 		$title = get_admin_page_title();
-		//$shares = get_smmp_posts();
-		$posts = query_posts(array('post__in' => array(2754)));
-		// merge posts with smmp entries
-		//wp_die(print_r($posts));
 		$smmp_posts = new SMMP_Post_List($this);
 
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-list.php';
