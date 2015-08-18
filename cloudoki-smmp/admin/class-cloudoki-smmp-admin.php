@@ -269,15 +269,55 @@ class SMMP_Admin {
 			'smmp_url_googleplus'=> get_option ('smmp_url_googleplus'),
 			'smmp_url_linkedin'=> get_option ('smmp_url_linkedin')
 		];
+
 		
 		// Facebook settings
-		$facebook = json_decode (get_option ('smmp_facebook'), true);
-		$facebook = $facebook[0]?: (object)[];
+		$facebook = $this->facebook_settings();
 		$facebook_path = plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-accounts-facebook.php';
-
-		update_option ('smmp_facebook', json_encode($facebook));
 		
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-display-accounts.php';
+	}
+	
+	/**
+	 * SMMP Social Accounts - Facebook settings.
+	 *
+	 * @since    1.0.0
+	 */
+	public function facebook_settings ()
+	{
+		$facebook = json_decode (get_option ('smmp_facebook')?: "{}");
+		
+		// Facebook update
+		if($_GET['admin-update'])
+		{
+			if( isset ($_GET['facebook-profile']))	$facebook->profile = $_GET['facebook-profile'];
+			if( isset ($_GET['facebook-id']))		$facebook->id = $_GET['facebook-id'];
+			if( isset ($_GET['facebook-primary']))	$facebook->primary = $_GET['facebook-primary'];
+		
+			// Facebook pages
+			$pages = [];
+			foreach($_GET as $key => $token)
+			{
+				if(substr($key, 0, 3) == 'fb-')
+				
+					$pages[$key] = strlen($token) < 12? $facebook->pages->{$key}: 
+					(object)[
+						'name'=> ucwords (implode (' ', array_slice (explode ('-', $key), 1))),
+						'access_token'=> $token,
+						'slug'=> $key
+					];
+			}
+			
+			// Prevent primary orphan
+			if ($facebook->primary && !isset ($pages[$facebook->primary]))
+				$facebook->primary = null;
+			
+			// Update
+			$facebook->pages = (object) $pages;
+			update_option ('smmp_facebook', json_encode($facebook));
+		}
+		
+		return $facebook;
 	}
 	
 	/**
