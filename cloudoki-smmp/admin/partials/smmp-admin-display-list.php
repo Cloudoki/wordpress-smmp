@@ -20,15 +20,11 @@
 
 	<h2><?=$title?></h2>
 	
-	<ul class="subsubsub">
-		<li class="all"><a href="#" class="current">All <span class="count">(n)</span></a> |</li>
-		<li class="publish"><a href="#">Pending <span class="count">(n)</span></a> |</li>
-		<li class="publish"><a href="#">Published <span class="count">(n)</span></a></li>
-	</ul>
 	<form id="posts-filter" method="get">
 		<?php
 			
 			$smmp_posts->prepare_items();
+			$smmp_posts->views();
 			$smmp_posts->display();
 		?>
 		<!--
