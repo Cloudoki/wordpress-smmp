@@ -58,15 +58,13 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 			'list'    => __( 'List View' ),
 			'excerpt' => __( 'Excerpt View' )
 		);
-		
-		exit (json_encode ($this->admin->available_types ()));
 	}
 
 	// get/delete/sort methods
 
 	/** Text displayed when no customer data is available */
 	public function no_items() {
-	  _e( 'No posts avaliable.', 'sp' );
+	  _e( 'No posts avaliable.');
 	}
 
 	/**
@@ -78,7 +76,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	 */
 	public function column_cb( $item ) {
 	  return sprintf(
-	    '<input type="checkbox" name="bulk-select[]" value="%s" />', $item['ID']
+	    '<input type="checkbox" name="bulk-select[]" value="%s" />', $item['id']
 	  );
 	}
 
@@ -90,11 +88,10 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	public function get_columns() {
 	  $columns = [
 	    'cb' => '<input type="checkbox" />',
-	    'type' => __( 'Social network' ),
-	    'post_content' => __( 'Content' ),
-	    //'tags' => __( 'Tags' ),
-	    //'related' => __( 'Related' ),
-	    'publish_date' => __( 'Date' )
+	    'type' => __('Social network'),
+	    'status' => __('Status'),
+	    'alteration' => __('Alteration'),
+	    'publish_date' => __('Date')
 	  ];
 
 	  return $columns;
@@ -107,11 +104,9 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	 */
 	public function get_sortable_columns() {
 	  $sortable_columns = array(
-	    'type' => __( 'Social network' ),
-	    'post_content' => __( 'Content' ),
-	    //'tags' => __( 'Tags' ),
-	    //'related' => __( 'Related' ),
-	    'publish_date' => __( 'Date' )
+	    'type' => __('Social network'),
+	    'status' => __('Status'),
+	    'publish_date' => __('Date')
 	  );
 
 	  return $sortable_columns;
@@ -133,11 +128,9 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
   		$sortable = array();
   		$this->_column_headers = array($columns, $hidden, $sortable);
   		
-  		wp_die($this->admin->get_smmp_posts());
-  	  	//$posts = $admin->get_smmp_posts();
-  	  	$posts = self::get_posts();
-  	  	//wp_die(print_r($posts));
-  	  	$this->items = $posts;
+  		$posts = $this->admin->get_all_smmp_posts([], null, null, true);
+  		//wp_die(print_r($posts));
+  	  	$this->items = (array)$posts;
 	}
 }
 ?>

@@ -417,9 +417,10 @@ class SMMP_Admin {
 	 *	@param	int		$amount		limitation on response list
 	  *	@return	array
 	 */
-	public function get_all_smmp_posts ($stata=[], $offset=null, $limit=null)
+	public function get_all_smmp_posts ($stata=[], $offset=null, $amount=null, $array=false)
 	{
 		global $wpdb;
+		$limit_query = "";
 		
 		// get stata
 		$status_query = $stata && count($stata)? sprintf( " WHERE status IN('%s')", implode("','", $stata)): "";
@@ -431,7 +432,7 @@ class SMMP_Admin {
 				sprintf (" LIMIT %d,%d", $offset, $amount?: 1000000000):
 				sprintf (" LIMIT %d", $amount);
 				
-		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query));
+		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query), $array? 'ARRAY_A': 'OBJECT');
 	}
 	
 	/**
