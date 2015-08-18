@@ -204,13 +204,13 @@ class SMMP_Admin {
 		}
 
 		// Mark as deleted
-		foreach($posts as $post) {
+		/*foreach($posts as $post) {
 			if (!in_array($post['type'], $toggled)) {
 				// set the delete status
 			} else {
 				// update
 			}
-		}
+		}*/
 
 		// Add unexisting
 		//$this->queue_smmp_posts($post_id, $toggled);
