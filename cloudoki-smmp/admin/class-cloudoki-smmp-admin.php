@@ -406,32 +406,6 @@ class SMMP_Admin {
 	}
 	
 	/**
-	 *	Get smmp all records
-	 *
-	 *	@param	array	$stata		array of smmp post statusses
-	 *	@param	int		$offset		start from offset count
-	 *	@param	int		$amount		limitation on response list
-	  *	@return	array
-	 */
-	public function get_all_smmp_posts ($stata=[], $offset=null, $amount=null, $array=false)
-	{
-		global $wpdb;
-		$limit_query = "";
-		
-		// get stata
-		$status_query = $stata && count($stata)? sprintf( " WHERE status IN('%s')", implode("','", $stata)): "";
-		
-		// get limits
-		if ($offset || $amount)
-		
-			$limit_query = $offset?
-				sprintf (" LIMIT %d,%d", $offset, $amount?: 1000000000):
-				sprintf (" LIMIT %d", $amount);
-				
-		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query), $array? 'ARRAY_A': 'OBJECT');
-	}
-	
-	/**
 	 *	Get smmp records
 	 *
 	 *	@param	int		$post_id	id of wp post record
@@ -447,6 +421,54 @@ class SMMP_Admin {
 		$status_query = $status? sprintf( " AND status = '%s'", $status): "";
 		
 		return $wpdb->get_results(sprintf( "SELECT * FROM %s WHERE post_id = %d%s%s", $this->table_name, $post_id, $types_query, $status_query));
+	}
+	
+	/**
+	 *	Get smmp all records
+	 *
+	 *	@param	array	$stata			array of smmp post statusses
+	 *	@param	int		$offset			start from offset count
+	 *	@param	int		$amount			limitation on response list
+	 *	@param	string	$output_type	wpdb output, defaults to "OBJECT"
+	 									see https://codex.wordpress.org/Class_Reference/wpdb for all options
+	 *	@return	mixed
+	 */
+	public function get_all_smmp_posts ($stata=[], $offset=null, $amount=null, $output_type="OBJECT")
+	{
+		global $wpdb;
+		
+		// get stata
+		$status_query = $stata && count($stata)? sprintf( " WHERE status IN('%s')", implode("','", $stata)): "";
+		
+		// get limits
+		$limit_query = $offset?
+		
+			sprintf (" LIMIT %d,%d", $offset, $amount?: 1000000000):
+			($amount? sprintf (" LIMIT %d", $amount): "");
+				
+		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query), $output_type);
+	}
+	
+	/**
+	 *	Count smmp posts
+	 *
+	 *	@param	array	$types		array of smmp post types
+	 *	@param	array	$stata		array of smmp post statusses
+	  *	@return	integer
+	 */
+	public function count_smmp_posts ($types=[], $stata=[])
+	{
+		global $wpdb;
+		
+		// get types
+		$type_query = $types && count($types)? sprintf( " WHERE type IN('%s')", implode("','", $types)): "";
+		
+		// get stata
+		$status_query = $stata && count($stata)? sprintf( " %s status IN('%s')", $type_query? " AND": "WHERE", implode("','", $stata)): "";
+		
+		echo sprintf( "SELECT COUNT(*) FROM %s%s%s", $this->table_name, $type_query, $status_query);
+						
+		return (int) $wpdb->get_var(sprintf( "SELECT COUNT(*) FROM %s%s%s", $this->table_name, $type_query, $status_query));
 	}
 	 
 	/**
