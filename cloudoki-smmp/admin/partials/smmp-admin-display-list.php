@@ -11,6 +11,7 @@
  * @package    SMMP
  * @subpackage SMMP/admin/partials
  */
+
 ?>
 
 
@@ -25,7 +26,11 @@
 		<li class="publish"><a href="#">Published <span class="count">(n)</span></a></li>
 	</ul>
 	<form id="posts-filter" method="get">
-	
+		<?php
+			
+			$smmp_posts->prepare_items();
+			$smmp_posts->display();
+		?>
 		<!--
 		<p class="search-box">
 			<label class="screen-reader-text" for="post-search-input">Search Social Posts:</label>
@@ -33,7 +38,7 @@
 			<input type="submit" id="search-submit" class="button" value="Search Social Posts">
 		</p>
 		-->
-		
+		<!--
 		<div class="tablenav top">
 		
 			<div class="alignleft actions bulkactions">
@@ -78,10 +83,20 @@
 						<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
 						<input id="cb-select-all-1" type="checkbox"></th><th scope="col" id="title" class="manage-column column-title sortable desc" style="">
 						<a href="http://damn.local/wp-admin/edit.php?post_type=product&amp;orderby=title&amp;order=asc">
-							<span>Title</span><span class="sorting-indicator"></span>
+							<span><span class="dashicons dashicons-heart"></span></span><span class="sorting-indicator"></span>
+						</a>
+					</th>
+					<th scope="col" id="date" class="manage-column column-date sortable asc" style="">
+						<a href="http://damn.local/wp-admin/edit.php?post_type=product&amp;orderby=date&amp;order=desc">
+							<span>Content</span><span class="sorting-indicator"></span>
 						</a>
 					</th>
 					<th scope="col" id="tags" class="manage-column column-tags" style="">Tags</th>
+					<th scope="col" id="date" class="manage-column column-date sortable asc" style="">
+						<a href="http://damn.local/wp-admin/edit.php?post_type=product&amp;orderby=date&amp;order=desc">
+							<span>Related post</span><span class="sorting-indicator"></span>
+						</a>
+					</th>
 					<th scope="col" id="date" class="manage-column column-date sortable asc" style="">
 						<a href="http://damn.local/wp-admin/edit.php?post_type=product&amp;orderby=date&amp;order=desc">
 							<span>Date</span><span class="sorting-indicator"></span>
@@ -108,26 +123,10 @@
 							<span class="trash"><a class="submitdelete" title="Move this item to the Trash" href="http://damn.local/wp-admin/post.php?post=21&amp;action=trash&amp;_wpnonce=c9a9e7894f">Trash</a> | </span>
 							<span class="view"><a href="http://damn.local/product/a-test-product/" title="View “A test product”" rel="permalink">View</a></span>
 						</div>
-						<div class="hidden" id="inline_21">
-							<div class="post_title">A test product</div>
-							<div class="post_name">a-test-product</div>
-							<div class="post_author">1</div>
-							<div class="comment_status">closed</div>
-							<div class="ping_status">closed</div>
-							<div class="_status">publish</div>
-							<div class="jj">03</div>
-							<div class="mm">08</div>
-							<div class="aa">2015</div>
-							<div class="hh">11</div>
-							<div class="mn">28</div>
-							<div class="ss">30</div>
-							<div class="post_password"></div>
-							<div class="tags_input" id="post_tag_21"></div>
-							<div class="tags_input" id="magazine_21"></div>
-							<div class="sticky"></div>
-						</div>
 					</td>
+					<td class="tags column-content">—</td>
 					<td class="tags column-tags">—</td>
+					<td class="tags column-related">—</td>
 					<td class="date column-date"><abbr title="2015/08/03 11:28:30 am">2015/08/03</abbr><br>Published</td>
 				</tr>
 			</tbody>
@@ -177,6 +176,7 @@
 			</div>
 			<br class="clear">
 		</div>
+		-->
 	</form>
 
 	<div id="ajax-response"></div>
