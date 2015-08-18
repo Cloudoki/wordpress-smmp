@@ -23,8 +23,10 @@ if ( ! class_exists( 'SMMP_Admin' ) ) {
 class SMMP_Post_List extends SMMP_List_Table {
 
 	/** Class constructor */
-	public function __construct() {
+	public function __construct($admin_class) {
 
+		$this->admin = $admin_class;
+		wp_die(print_r($this->admin->get_smmp_posts));
 		parent::__construct( [
 			'singular' => __( 'Post', 'sp' ), //singular name of the listed records
 			'plural'   => __( 'Posts', 'sp' ), //plural name of the listed records
@@ -87,19 +89,6 @@ class SMMP_Post_List extends SMMP_List_Table {
 	  return $sortable_columns;
 	}
 
-	/*
-	 * Temporary help function 
-	 */
-	public static function get_posts( $per_page = 25, $page_number = 1 ) {
-
-	  	global $wpdb;
-
-	  	$posts_table = 'wp_posts';
-	  	$smmp_table = 'wp_smmp';
-	  	$sql = "SELECT * FROM %s AS p INNER JOIN %s as s WHERE p.id = s.post_id";
-		
-		return $wpdb->get_results(sprintf( $sql, $posts_table, $smmp_table), 'ARRAY_A');
-	}
 
 	public function column_default( $item, $column_name ) {
 
@@ -115,8 +104,8 @@ class SMMP_Post_List extends SMMP_List_Table {
   		$hidden = array();
   		$sortable = array();
   		$this->_column_headers = array($columns, $hidden, $sortable);
-  		//$admin = new SMMP_Admin('cloudoki-smmp', '1.0.0');
-
+  		
+  		wp_die($this->admin->get_smmp_posts());
   	  	//$posts = $admin->get_smmp_posts();
   	  	$posts = self::get_posts();
   	  	//wp_die(print_r($posts));
