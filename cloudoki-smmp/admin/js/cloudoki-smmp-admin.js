@@ -36,7 +36,7 @@
 
 jQuery(document).ready(function()
 {
-	smmp_admin.init ();
+	//smmp_admin.init ();
 });
 
 

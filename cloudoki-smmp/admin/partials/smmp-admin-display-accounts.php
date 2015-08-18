@@ -87,3 +87,11 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function()
+	{
+		smmp_admin.init ();
+	});
+</script>

@@ -410,6 +410,31 @@ class SMMP_Admin {
 	}
 	
 	/**
+	 *	Get smmp all records
+	 *
+	 *	@param	array	$stata		array of smmp post statusses
+	 *	@param	int		$offset		start from offset count
+	 *	@param	int		$amount		limitation on response list
+	  *	@return	array
+	 */
+	public function get_all_smmp_posts ($stata=[], $offset=null, $limit=null)
+	{
+		global $wpdb;
+		
+		// get stata
+		$status_query = $stata && count($stata)? sprintf( " WHERE status IN('%s')", implode("','", $stata)): "";
+		
+		// get limits
+		if ($offset || $amount)
+		
+			$limit_query = $offset?
+				sprintf (" LIMIT %d,%d", $offset, $amount?: 1000000000):
+				sprintf (" LIMIT %d", $amount);
+				
+		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query));
+	}
+	
+	/**
 	 *	Get smmp records
 	 *
 	 *	@param	int		$post_id	id of wp post record
