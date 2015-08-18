@@ -465,8 +465,6 @@ class SMMP_Admin {
 		
 		// get stata
 		$status_query = $stata && count($stata)? sprintf( " %s status IN('%s')", $type_query? " AND": "WHERE", implode("','", $stata)): "";
-		
-		echo sprintf( "SELECT COUNT(*) FROM %s%s%s", $this->table_name, $type_query, $status_query);
 						
 		return (int) $wpdb->get_var(sprintf( "SELECT COUNT(*) FROM %s%s%s", $this->table_name, $type_query, $status_query));
 	}

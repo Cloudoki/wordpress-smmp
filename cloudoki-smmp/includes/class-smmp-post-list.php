@@ -137,14 +137,14 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
   		$per_page     	= $this->per_page;
         $current_page 	= $this->get_pagenum();
         $offset 		= ($current_page - 1)*$per_page;
-  		$total_items  	= null;
+  		$total_items  	= $this->admin->count_smmp_posts();
 
   		$this->set_pagination_args( [
     		'total_items' => $total_items, 	//WE have to calculate the total number of items
     		'per_page'    => $per_page 		//WE have to determine how many items to show on a page
   		]);
   		
-  		$posts = $this->admin->get_all_smmp_posts([], $offset, $per_page, true);
+  		$posts = $this->admin->get_all_smmp_posts([], $offset, $per_page, 'ARRAY_A');
   		//wp_die(print_r($posts));
   	  	$this->items = (array)$posts;
 	}
