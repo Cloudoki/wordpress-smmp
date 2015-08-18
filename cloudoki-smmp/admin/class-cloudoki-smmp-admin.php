@@ -384,7 +384,7 @@ class SMMP_Admin {
 		if (count ($facebook))
 		{
 			$list[] = 'facebook';
-			foreach ($facebook[0]->pages as $page)
+			foreach ($facebook->pages as $page)
 			
 				$list[] = sprintf ("facebook-%s", sanitize_title ($page->name)); 
 		}

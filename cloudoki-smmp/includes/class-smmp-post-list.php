@@ -12,26 +12,54 @@
  * @subpackage SMMP/admin/partials
  */
 
+include_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+
+/*
+Useless, it's an exact copy
 if ( ! class_exists( 'SMMP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-content/plugins/cloudoki-smmp/includes/class-smmp-list-table.php' );
 }
+*/
+
+/*
+Useless, you're inside the class
 
 if ( ! class_exists( 'SMMP_Admin' ) ) {
 	require_once( ABSPATH . 'wp-content/plugins/cloudoki-smmp/class-cloudoki-smmp-admin' );
-}
+}*/
 
-class SMMP_Post_List extends SMMP_List_Table {
+class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
+	
+	
+	/**
+	 * The admin class, for smmp functions.
+	 *
+	 * @access   private
+	 * @var      class    $admin
+	 */
+	private $admin;
+	
 
-	/** Class constructor */
 	public function __construct($admin_class) {
 
 		$this->admin = $admin_class;
-		wp_die(print_r($this->admin->get_smmp_posts));
-		parent::__construct( [
-			'singular' => __( 'Post', 'sp' ), //singular name of the listed records
-			'plural'   => __( 'Posts', 'sp' ), //plural name of the listed records
-			'ajax'     => false //should this table support ajax?
-		] );
+		
+		$this->_args = [
+			'singular' => sanitize_key(__( 'Post', 'sp' )),
+			'plural'   => sanitize_key(__( 'Posts', 'sp' )),
+			'ajax' => false
+		];
+
+		$this->screen = convert_to_screen(null);
+
+		add_filter( "manage_{$this->screen->id}_columns", array( $this, 'get_columns' ), 0 );
+
+		$this->modes = array(
+			'list'    => __( 'List View' ),
+			'excerpt' => __( 'Excerpt View' )
+		);
+		
+		exit (json_encode ($this->admin->available_types ()));
 	}
 
 	// get/delete/sort methods
