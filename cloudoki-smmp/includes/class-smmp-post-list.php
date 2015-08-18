@@ -168,7 +168,8 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	  	$columns = $this->get_columns();
   		$hidden = array();
   		$sortable = array();
-  		
+  		$type = array_key_exists('type', $_REQUEST)? $_REQUEST['type']: null;
+
   		/** Process headers */
   		$this->_column_headers = array($columns, $hidden, $sortable);
 
@@ -177,6 +178,8 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 
   		/** Pagination */
   		$per_page     	= $this->per_page;
+  		$types 			= $type? array($type): [];
+
         $current_page 	= $this->get_pagenum();
         $offset 		= ($current_page - 1)*$per_page;
   		$this->total_posts = $this->admin->count_smmp_posts();
@@ -186,7 +189,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
     		'per_page'    => $per_page 			
   		]);
   		
-  		$posts = $this->admin->get_all_smmp_posts([], $offset, $per_page, 'ARRAY_A');
+  		$posts = $this->admin->get_all_smmp_posts($types, $offset, $per_page, 'ARRAY_A');
   		//wp_die(print_r($posts));
   	  	$this->items = (array)$posts;
 	}

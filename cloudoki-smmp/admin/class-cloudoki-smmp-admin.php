@@ -445,7 +445,7 @@ class SMMP_Admin {
 		
 			sprintf (" LIMIT %d,%d", $offset, $amount?: 1000000000):
 			($amount? sprintf (" LIMIT %d", $amount): "");
-				
+
 		return $wpdb->get_results(sprintf( "SELECT * FROM %s%s%s", $this->table_name, $status_query, $limit_query), $output_type);
 	}
 	
