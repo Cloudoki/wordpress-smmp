@@ -84,8 +84,10 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 		return "<a href='admin.php?page=smmp-list$q_string'$class>" . $all_inner_html . '</a>';
 	}
 
-	/*
-	 * Generates all the views widgets
+	/**
+	 * Renders the all / pending / published links
+	 *
+	 * @return array
 	 */
 	public function get_views() {
 
@@ -103,7 +105,10 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 		return $status_links;
 	}
 
-	/** Text displayed when no customer data is available */
+	/**
+	 * Empty text
+	 *
+	 */
 	public function no_items() {
 	  _e( 'No posts avaliable.');
 	}
@@ -122,6 +127,19 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	}
 
 	/**
+	 * Render the social icon
+	 *
+	 * @param array $item
+	 *
+	 * @return string
+	 */
+	public function column_social( $item ) {
+	  return sprintf(
+	    '<span class="dashicons dashicons-%s"></span>', $item['type']
+	  );
+	}
+
+	/**
 	 *  Associative array of columns
 	 *
 	 * @return array
@@ -129,7 +147,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	public function get_columns() {
 	  $columns = [
 	    'cb' => '<input type="checkbox" />',
-	    'type' => __('Social network'),
+	    'social' => __('Social network'),
 	    'content' => __('Content'),
 	    'status' => __('Status'),
 	    'publish_date' => __('Date')
@@ -145,7 +163,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	 */
 	public function get_sortable_columns() {
 	  $sortable_columns = array(
-	    'type' => __('Social network'),
+	    'social' => __('Social network'),
 	    'content' => __('Content'),
 	    'status' => __('Status'),
 	    'publish_date' => __('Date')
@@ -154,7 +172,11 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	  return $sortable_columns;
 	}
 
-
+	/**
+	 * Default format for columns
+	 *
+	 * @return array
+	 */
 	public function column_default( $item, $column_name ) {
 
 	    return $item[ $column_name ];
@@ -162,6 +184,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 
 	/**
 	 * Handles data query and filter, sorting, and pagination.
+	 *
 	 */
 	public function prepare_items() {
 
@@ -189,12 +212,20 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
     		'per_page'    => $per_page 			
   		]);
   		
+  		/* Get & format posts */
   		$smmps = $this->admin->get_all_smmp_posts($types, $offset, $per_page, 'ARRAY_A');
   		$smmps = $this->add_posts_content($smmps);
-  		//wp_die(print_r($posts));
+
   	  	$this->items = (array)$smmps;
 	}
 
+	/**
+	 * Append content to smmp posts list
+	 *
+	 * @param array $smmps List of smmp entries
+	 *
+	 * @return aray $posts List of smmp merged with the original posts
+	 */
 	public function add_posts_content($smmps) {
 
 		$posts = $smmps;
