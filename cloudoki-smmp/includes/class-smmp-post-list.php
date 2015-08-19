@@ -130,7 +130,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	  $columns = [
 	    'cb' => '<input type="checkbox" />',
 	    'type' => __('Social network'),
-	    //'message' => __('Message'),
+	    'content' => __('Content'),
 	    'status' => __('Status'),
 	    'publish_date' => __('Date')
 	  ];
@@ -146,7 +146,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	public function get_sortable_columns() {
 	  $sortable_columns = array(
 	    'type' => __('Social network'),
-	    //'message' => __('Message'),
+	    'content' => __('Content'),
 	    'status' => __('Status'),
 	    'publish_date' => __('Date')
 	  );
@@ -167,7 +167,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 
 	  	$columns = $this->get_columns();
   		$hidden = array();
-  		$sortable = array();
+  		$sortable = $this->get_sortable_columns();
   		$type = array_key_exists('type', $_REQUEST)? $_REQUEST['type']: null;
 
   		/** Process headers */
@@ -189,9 +189,25 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
     		'per_page'    => $per_page 			
   		]);
   		
-  		$posts = $this->admin->get_all_smmp_posts($types, $offset, $per_page, 'ARRAY_A');
+  		$smmps = $this->admin->get_all_smmp_posts($types, $offset, $per_page, 'ARRAY_A');
+  		$smmps = $this->add_posts_content($smmps);
   		//wp_die(print_r($posts));
-  	  	$this->items = (array)$posts;
+  	  	$this->items = (array)$smmps;
+	}
+
+	public function add_posts_content($smmps) {
+
+		$posts = $smmps;
+
+		foreach($smmps as $i => $smmp) {
+			$post = get_post($smmp['post_id']);
+			$posts[$i]['content'] = $smmp['alteration'] ?: 
+									$post->post_excerpt ?: 
+									substr($post->post_title.' '. strip_tags($post->post_content), 0, 114).'...';
+
+		}
+
+		return $posts;
 	}
 }
 ?>
