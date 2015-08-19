@@ -49,15 +49,17 @@ jQuery(document).ready(function()
 var smmp_admin = 
 {
 	init : function ()
+	{		
+		// load Facebook
+		jQuery.ajaxSetup({ cache: true });
+		jQuery.getScript('//connect.facebook.net/en_US/sdk.js', smmp_admin.init_facebook);
+	},
+
+	init_post_functions: function() 
 	{
 		// Connect and publish buttons
 		jQuery('#connect-twitter').on('click', this.connect_twitter);
 		jQuery('.misc-pub-smmp.pending .smmp-share-button').click(function(){smmp_admin.toggle_smmp_share(jQuery(this))});
-		
-		
-		// load Facebook
-		jQuery.ajaxSetup({ cache: true });
-		jQuery.getScript('//connect.facebook.net/en_US/sdk.js', smmp_admin.init_facebook);
 	},
 	
 	init_facebook : function ()

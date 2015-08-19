@@ -163,24 +163,33 @@ class SMMP_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function admin_post_submitbox ($post_id)
+	public function admin_post_submitbox ()
 	{	
-		// update this to dynamic
-		$tempdata = array(
-			'facebook' => array( 'status' => 'pending', 'type' => 'facebook' ),
-			'twitter' => array( 'status' => '', 'type' => 'twitter' )
-		);
-
+		$post_id = get_the_ID();
 		$post_status = get_post_status($post_id);
 		$status_class = $post_status == 'future'? 'pending': $post_status;
 
-		$fb_active = in_array($tempdata['facebook']['status'], array('pending', 'published'));
-		$fb_active_class = $fb_active? 'active': '';
-		$fb_checked = $fb_active? 'checked': '';
+		// Declare variables
+		foreach($this->available_types() as $type) {
+			${$type.'_active'} = false;
+			${$type.'_active_class'} = '';
+			${$type.'_checked'} = '';
+			${$type.'_id'} = '';
+		}
 
-		$twt_active = in_array($tempdata['twitter']['status'], array('pending', 'published'));
-		$twt_active_class = $twt_active? 'active': '';
-		$twt_checked = $twt_active? 'checked': '';
+		$variations = $this->get_smmp_posts($post_id); //, null, $status_class == 'pending'? 'pending': 'published'
+
+		// Create active classes
+		foreach($variations as $variation) {
+
+			$active = in_array($variation->status, array('pending', 'published'));
+
+			$type = $variation->type;
+			${$type.'_active'} = $active? true: false;
+			${$type.'_active_class'} = $active? 'active': '';
+			${$type.'_checked'} = $active? 'checked': '';
+			${$type.'_id'} = $variation->id;
+		}
 
 		include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/smmp-admin-post-submitbox.php';
 	}
@@ -193,34 +202,29 @@ class SMMP_Admin {
 	public function admin_post_submitbox_submit ($post_id) {
 
 		$types = $this->available_types();
-		$posts = $this->get_smmp_posts($post_id, $types);
-		$toggled = [];
 
-		// Get toggled status
+		
 		foreach($types as $type) {
+
+			// Mark as toggled
 			if (array_key_exists('smmp-share-'.$type, $_POST)) {
-				$toggled[] = $type;
+				
+				if (array_key_exists('smmp-'.$type.'-id', $_POST)) {	// Update existing smmp entry
+					$smmp_id = $_POST['smmp-'.$type.'-id'];
+					// update - not finished
+				}
+				else {													// Add new smmp entry
+					$this->queue_smmp_post($post_id, $type);
+				}	
 			}
-		}
 
-		// Mark as deleted
-		/*foreach($posts as $post) {
-			if (!in_array($post['type'], $toggled)) {
-				// set the delete status
-			} else {
-				// update
+			// Mark as deleted
+			if (array_key_exists('smmp-'.$type.'-id', $_POST)) {		// Delete existing smmp entry
+				if (!array_key_exists('smmp-share-'.$type, $_POST)) {
+					// delete - not finished
+				}
 			}
-		}*/
-
-		// Add unexisting
-		//$this->queue_smmp_posts($post_id, $toggled);
-
-		foreach($types as $type) {
-			
-		}
-
-		if ($_POST['smmp-share-facebook']) $this->queue_smmp_post($post_id, 'facebook');
-		if ($_POST['smmp-share-twitter']) $this->queue_smmp_post($post_id, 'twitter');
+		}		
 	}
 	
 	/**
