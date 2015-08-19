@@ -140,6 +140,21 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	}
 
 	/**
+	 * Render the related/original post column
+	 *
+	 * @param array $item
+	 *
+	 * @return string
+	 */
+	public function column_related( $item ) {
+	  return sprintf(
+	    '<a href="post.php?post=%d&action=edit"><span class="dashicons dashicons-%s"></span></a>',
+	    $item['id'],
+	    $item['format']? 'format-'.$item['format']: 'admin-post'
+	  );
+	}
+
+	/**
 	 *  Associative array of columns
 	 *
 	 * @return array
@@ -149,6 +164,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 	    'cb' => '<input type="checkbox" />',
 	    'social' => __('Social network'),
 	    'content' => __('Content'),
+	    'related' => __('Related'),
 	    'status' => __('Status'),
 	    'publish_date' => __('Date')
 	  ];
@@ -235,7 +251,7 @@ class SMMP_Post_List extends WP_List_Table /*SMMP_List_Table*/ {
 			$posts[$i]['content'] = $smmp['alteration'] ?: 
 									$post->post_excerpt ?: 
 									substr($post->post_title.' '. strip_tags($post->post_content), 0, 114).'...';
-
+			$posts[$i]['format'] = get_post_format($smmp['post_id'] ?: 'standard');
 		}
 
 		return $posts;
